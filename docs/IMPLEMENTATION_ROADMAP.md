@@ -1,6 +1,6 @@
 # Implementation Roadmap — Codex Execution Plan
 
-Status: The documentation baseline and foundation PR #3 are merged. The owner approved the Milestone 2 design direction and authorized the next milestone. Milestone 3 core pages and bilingual case studies are implemented on `feat/core-portfolio` and delivered in a dependent draft PR. Vercel integration, merge, and production deployment remain pending.
+Status: The documentation baseline, foundation PR #3, and design PR #4 are merged. The owner approved the Milestone 2 design direction and authorized the next milestone. Milestone 3 core pages and bilingual case studies are implemented on `feat/core-portfolio` and delivered in a dependent draft PR. Vercel integration, merge, and production deployment remain pending.
 
 ## Repository and Governance
 - Repository: `github.com/lutfim22/portfolio` (created; public).
@@ -28,7 +28,7 @@ Acceptance:
 
 Tasks:
 1. Implemented locally: Next.js + React + TypeScript + Tailwind v4 foundation.
-2. Implemented locally: lint, typecheck, unit tests, formatting, GitHub Actions CI definition, and documented environment handling (no secrets required). CI execution on GitHub remains unverified until the branch is pushed.
+2. Implemented locally: lint, typecheck, unit tests, formatting, GitHub Actions CI definition, and documented environment handling (no secrets required). GitHub CI passed before the foundation PR was merged.
 3. Implemented locally: `/en` and `/id` routing, page-preserving language links, typed UI content, and repository-authored MDX About pages.
 4. Pending: GitHub PR previews on Vercel after deployment authorization and available service access.
 
@@ -120,9 +120,9 @@ Documentation & Setup → Foundation → Design Approval → Core Experience →
 
 ## Milestone PR status
 
-Milestone 0 was merged in PR #1. Milestones 1, 2, and 3 now have focused stacked
-draft PRs [#3](https://github.com/lutfim22/portfolio/pull/3),
-[#4](https://github.com/lutfim22/portfolio/pull/4), and
-[#5](https://github.com/lutfim22/portfolio/pull/5), respectively. See [PR delivery rules](PR_WORKFLOW.md) for the complete milestone
+Milestone 0 was merged in PR #1. Foundation [#3](https://github.com/lutfim22/portfolio/pull/3)
+and design [#4](https://github.com/lutfim22/portfolio/pull/4) are merged.
+Core-content [#5](https://github.com/lutfim22/portfolio/pull/5) is the remaining
+open milestone PR and targets main. See [PR delivery rules](PR_WORKFLOW.md) for the complete milestone
 mapping, review gates, dependency order, and future CV/quality work. Chat
 approval of a visual direction does not authorize a GitHub merge or deployment.
