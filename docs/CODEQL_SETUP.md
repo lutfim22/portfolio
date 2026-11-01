@@ -48,3 +48,10 @@ Reference: [GitHub's advanced setup instructions](https://docs.github.com/en/cod
 Historical managed-run annotations remain in their old runs. Completion means
 fresh advanced scans actually run on `ubuntu-24.04`, upload both language results,
 and have no runner-migration notices. A syntax check alone does not establish it.
+
+## Validation finding resolved
+
+The extended Actions query identified the third-party pnpm setup action using a
+version tag. The existing v6.1.0 release is now pinned to its official commit SHA
+in CI. This preserves its version and behavior while addressing
+`actions/unpinned-tag`; no query was disabled or alert dismissed.
