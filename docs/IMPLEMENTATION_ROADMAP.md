@@ -1,6 +1,6 @@
 # Implementation Roadmap — Codex Execution Plan
 
-Status: The documentation baseline, foundation PR #3, and design PR #4 are merged. The owner approved the Milestone 2 design direction and authorized the next milestone. Milestone 3 core pages and bilingual case studies are implemented on `feat/core-portfolio` and delivered in a dependent draft PR. Vercel integration, merge, and production deployment remain pending.
+Status: Documentation, foundation (#3), design (#4), and core content (#5) are merged. Milestone 4 delivers an ATS CV, a Premium layout draft, and bilingual download pages. Premium finalization requires an owner-supplied headshot. Website deployment remains pending.
 
 ## Repository and Governance
 - Repository: `github.com/lutfim22/portfolio` (created; public).
@@ -82,10 +82,10 @@ remain later work; no launch is implied by local completion.
 **Dependencies:** approved CV source and owner-supplied headshot for Premium CV.
 
 Tasks:
-1. Create ATS-friendly A4 PDF, single column, no photograph.
-2. Create Premium A4 two-column PDF with subtle violet accents and small headshot.
-3. Validate page count target (max two), text extraction, print layout, link function, and content parity.
-4. Link downloadable CVs from portfolio.
+1. Implemented for review: two-page A4 ATS PDF, single column, no photograph; generated directly from the professional profile.
+2. Implemented for review: two-page A4 Premium layout with violet accents. Finalization and public download remain blocked on an owner-supplied headshot.
+3. Implemented: automated two-page/A4/text-extraction/link/source-parity checks and print-overflow checks; both layouts visually reviewed.
+4. Implemented: localized CV pages, navigation, and a working ATS download. Premium draft stays outside public download files until finalized.
 
 Acceptance:
 - Both versions use identical approved facts, are selectable/searchable, and are legible in print.
@@ -122,7 +122,7 @@ Documentation & Setup → Foundation → Design Approval → Core Experience →
 
 Milestone 0 was merged in PR #1. Foundation [#3](https://github.com/lutfim22/portfolio/pull/3)
 and design [#4](https://github.com/lutfim22/portfolio/pull/4) are merged.
-Core-content [#5](https://github.com/lutfim22/portfolio/pull/5) is the remaining
-open milestone PR and targets main. See [PR delivery rules](PR_WORKFLOW.md) for the complete milestone
+Core-content [#5](https://github.com/lutfim22/portfolio/pull/5) is also merged.
+CV production is the next focused PR against main. See [PR delivery rules](PR_WORKFLOW.md) for the complete milestone
 mapping, review gates, dependency order, and future CV/quality work. Chat
 approval of a visual direction does not authorize a GitHub merge or deployment.

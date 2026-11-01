@@ -41,3 +41,6 @@ yarn-error.log*
 Thumbs.db
 .idea/
 .vscode/
+
+# Local CV review HTML embeds generated font data
+/docs/cv-review/*.html

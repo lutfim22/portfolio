@@ -1137,3 +1137,17 @@
     font-size: clamp(2.5rem, 9vw, 4rem);
   }
 }
+
+.cv-download {
+  max-width: 65ch;
+  margin-block: 3rem;
+  padding-block: 2rem;
+  border-top: 1px solid var(--ds-border);
+}
+.cv-download h2 {
+  font-size: 2rem;
+}
+.cv-download p {
+  color: var(--ds-muted);
+  margin-block: 1.5rem;
+}

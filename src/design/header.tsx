@@ -27,13 +27,14 @@ export function ReviewHeader({
   const navHref = (id: string) =>
     review || id === "work"
       ? `${localizedPath(locale, home)}#${id}`
-      : localizedPath(locale, id as "journey" | "about" | "contact");
+      : localizedPath(locale, id as "journey" | "about" | "contact" | "cv");
   const menu = useRef<HTMLDetailsElement>(null);
   const links = [
     ["work", c.work],
     ["journey", c.journey],
     ["about", c.about],
     ["contact", c.contact],
+    ["cv", "CV"],
   ];
   const close = () => {
     if (menu.current) menu.current.open = false;
@@ -70,15 +71,17 @@ export function ReviewHeader({
           LM<span>.</span>
         </Link>
         <nav className="desktop-nav" aria-label={c.navigation}>
-          {links.map(([id, label]) => (
-            <a
-              key={id}
-              href={navHref(id)}
-              aria-current={!review && page === id ? "page" : undefined}
-            >
-              {label}
-            </a>
-          ))}
+          {links
+            .filter(([id]) => !review || id !== "cv")
+            .map(([id, label]) => (
+              <a
+                key={id}
+                href={navHref(id)}
+                aria-current={!review && page === id ? "page" : undefined}
+              >
+                {label}
+              </a>
+            ))}
         </nav>
         <div className="header-tools">
           <nav className="language-nav" aria-label={c.language}>
@@ -108,16 +111,18 @@ export function ReviewHeader({
           >
             <summary>{c.menu}</summary>
             <nav aria-label={c.navigation}>
-              {links.map(([id, label]) => (
-                <a
-                  key={id}
-                  onClick={close}
-                  href={navHref(id)}
-                  aria-current={!review && page === id ? "page" : undefined}
-                >
-                  {label}
-                </a>
-              ))}
+              {links
+                .filter(([id]) => !review || id !== "cv")
+                .map(([id, label]) => (
+                  <a
+                    key={id}
+                    onClick={close}
+                    href={navHref(id)}
+                    aria-current={!review && page === id ? "page" : undefined}
+                  >
+                    {label}
+                  </a>
+                ))}
             </nav>
           </details>
         </div>
