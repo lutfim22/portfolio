@@ -34,3 +34,16 @@ without force-pushing or merging without owner authorization.
 - Commit to the focused feature branch, push normally, and open/update its PR.
 - Report the PR URL, check status, review gate, and any real access blocker.
 - Keep local checks, GitHub CI results, visual approval, merge, and deployment distinct.
+
+## Attribution and autonomous progression
+
+Follow AGENTS.md before every task. Every AI-assisted commit must end with the
+Git trailer `Co-authored-by: codex <codex@openai.com>`. Verify it before pushing
+and preserve it through history edits and squash-message preparation.
+
+Advance authorized milestones without waiting for another "next" instruction.
+Complete implementation, appropriate validation, commits, focused PR delivery,
+and CI follow-up autonomously. Continue work that does not depend on a missing
+prerequisite. Request owner action only for a real blocker or an explicit review
+gate, with the reason, exact steps, and the work that will resume. Merge and
+deployment still require explicit authorization.

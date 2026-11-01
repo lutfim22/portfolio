@@ -16,3 +16,28 @@ when each milestone or independent task becomes reviewable; do not leave several
 completed milestones bundled as local changes. Use dependent draft PRs for
 stacked work. Design approval is separate from merge approval. Never merge or
 deploy without the owner's explicit authorization.
+
+## AI attribution and autonomous delivery
+
+Before starting a task, read and analyze AGENTS.md, docs/PR_WORKFLOW.md, the
+roadmap, and other applicable instructions. Apply their constraints throughout
+the work; do not start implementation before this review.
+
+Every commit created or changed with AI assistance must include this exact Git
+trailer, including code, tests, documentation, CI, and commit-only corrections:
+
+Co-authored-by: codex <codex@openai.com>
+
+Check the final commit message before pushing. Preserve the trailer when
+amending, rebasing, cherry-picking, and preparing squash commit messages. Never
+leave an AI-assisted commit without attribution.
+
+Proceed autonomously through authorized tasks and milestones: inspect, implement,
+validate, commit, push, open/update focused PRs, inspect CI, and fix failures.
+Continue independent work when another task is blocked; do not stop merely to
+ask whether to continue. Ask the owner for action only when a missing asset,
+credential, decision, or required approval prevents the dependent work. State
+what is blocked, why it is needed, the exact steps the owner should take, and
+what will resume afterward. Routine reversible choices do not need confirmation.
+Existing explicit merge, public-content, visual, and deployment approval gates
+still apply; general autonomy does not silently approve those actions.
