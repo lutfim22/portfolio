@@ -1,0 +1,5 @@
+saveExact: true
+storeDir: .pnpm-store
+allowBuilds:
+  sharp: true
+  unrs-resolver: true
