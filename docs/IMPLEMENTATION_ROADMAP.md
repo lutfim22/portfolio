@@ -121,6 +121,8 @@ Documentation & Setup → Foundation → Design Approval → Core Experience →
 ## Milestone PR status
 
 Milestone 0 was merged in PR #1. Milestones 1, 2, and 3 now have focused stacked
-draft PRs. See [PR delivery rules](PR_WORKFLOW.md) for the complete milestone
+draft PRs [#3](https://github.com/lutfim22/portfolio/pull/3),
+[#4](https://github.com/lutfim22/portfolio/pull/4), and
+[#5](https://github.com/lutfim22/portfolio/pull/5), respectively. See [PR delivery rules](PR_WORKFLOW.md) for the complete milestone
 mapping, review gates, dependency order, and future CV/quality work. Chat
 approval of a visual direction does not authorize a GitHub merge or deployment.
