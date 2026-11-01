@@ -1,12 +1,12 @@
 # Implementation Roadmap — Codex Execution Plan
 
-Status: The public `lutfim22/portfolio` repository exists, and all five planning documents are approved as the documentation baseline. PR #1 awaits review and merge approval. Application implementation and production deployment are not yet authorized.
+Status: The public `lutfim22/portfolio` repository exists, and all five planning documents are approved as the documentation baseline. PR #1 is merged. The Milestone 1 foundation is implemented on its focused branch and prepared for PR review. Merge and deployment remain separate approvals.
 
 ## Repository and Governance
 - Repository: `github.com/lutfim22/portfolio` (created; public).
 - Visibility: public from day one, following public-safety review.
 - Initial commit completed: README, `.gitignore`, and minimal repository setup.
-- PR #1: five approved Markdown planning documents; draft awaiting review and merge approval.
+- PR #1: five approved Markdown planning documents, merged.
 - Feature branches, focused PRs, clear acceptance criteria, CI, preview deployments, and explicit owner approval for merge.
 - Never publish unverified content or secrets. Use English for repository docs, code, PR descriptions, and commits.
 
@@ -16,7 +16,7 @@ Status: The public `lutfim22/portfolio` repository exists, and all five planning
 Tasks:
 1. Completed: create public `lutfim22/portfolio` repository with README and `.gitignore`.
 2. Completed: add public-safe documentation on `docs/initial-documentation`.
-3. Opened: documentation PR #1 with checklist and summary. Pending: owner review and merge approval.
+3. Completed: documentation PR #1 merged as `6f2fb5c`.
 
 Acceptance:
 - Exactly approved files are committed; no confidential or unverified facts.
@@ -101,3 +101,10 @@ Acceptance:
 
 ## Suggested GitHub Milestones
 Documentation & Setup → Foundation → Design Approval → Core Experience → CV Delivery → Quality & Launch.
+
+## PR delivery
+
+Follow [the PR workflow](PR_WORKFLOW.md). The foundation PR includes the pinned
+pnpm release and lockfile, CI configuration, localized routes, and MDX. Later
+milestones must be delivered in their own focused PRs; local completion and
+chat approval do not replace GitHub review and merge approval.
