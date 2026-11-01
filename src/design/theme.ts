@@ -1,0 +1,1 @@
+export const themeBootstrap = `(function(){try{var t=localStorage.getItem('portfolio-theme');document.documentElement.dataset.portfolioTheme=t==='light'||t==='dark'?t:matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}catch{document.documentElement.dataset.portfolioTheme='dark'}})()`;

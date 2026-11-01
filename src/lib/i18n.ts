@@ -1,6 +1,6 @@
 export const locales = ["en", "id"] as const;
 export type Locale = (typeof locales)[number];
-export type Page = "home" | "about";
+export type Page = "home" | "about" | "prototype" | "design";
 export function isLocale(value: string): value is Locale {
   return locales.some((locale) => locale === value);
 }

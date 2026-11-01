@@ -108,3 +108,11 @@ Follow [the PR workflow](PR_WORKFLOW.md). The foundation PR includes the pinned
 pnpm release and lockfile, CI configuration, localized routes, and MDX. Later
 milestones must be delivered in their own focused PRs; local completion and
 chat approval do not replace GitHub review and merge approval.
+
+## Milestone 2 delivery
+
+The owner approved the concrete design direction. A dependent design PR includes
+the tokens, self-hosted fonts, reference routes, responsive homepage prototype,
+theme persistence, timeline category filtering, native dialogs, SVG artwork, and
+browser/accessibility tests. The foundation homepage remains separate until the
+core content PR. Approval of the visual proposal is not GitHub merge approval.

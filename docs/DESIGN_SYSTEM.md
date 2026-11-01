@@ -1,6 +1,6 @@
 # Portfolio Design System
 
-Status: Design direction approved in discovery; exact tokens, mockups, and assets await visual review.
+Status: The owner approved proposal 01 in chat. Tokens, self-hosted fonts, the responsive prototype, and abstract artwork are delivered in a focused design PR; GitHub merge approval remains separate.
 
 ## Identity
 **Premium Hybrid / Engineering Journey** — modern editorial clarity with subtle futuristic depth. The visual language should feel crafted and technically credible, not like a generic template.
@@ -54,3 +54,5 @@ Status: Design direction approved in discovery; exact tokens, mockups, and asset
 4. Owner approval before production implementation.
 
 Exact colors, spacing scales, and interaction durations are implementation proposals requiring visual validation, not preapproved facts.
+
+Concrete specimens and contrast evidence: [design review guide](design-review/README.md).
