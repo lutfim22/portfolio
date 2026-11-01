@@ -55,3 +55,11 @@ The extended Actions query identified the third-party pnpm setup action using a
 version tag. The existing v6.1.0 release is now pinned to its official commit SHA
 in CI. This preserves its version and behavior while addressing
 `actions/unpinned-tag`; no query was disabled or alert dismissed.
+
+## Migration status
+
+The owner selected advanced setup and merged PR #8. The checked-in CodeQL
+workflow is now the active configuration on main. The owner-only migration steps
+above are retained for reference, not a request to repeat the migration. Follow-up
+branches must inherit this workflow and its pinned third-party action reference.
+Main and PR scans must continue to upload both language results successfully.

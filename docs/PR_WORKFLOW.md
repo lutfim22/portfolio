@@ -62,3 +62,11 @@ deployment still require explicit authorization.
 Foundation PR #3, design PR #4, and core-content PR #5 are merged. Milestone 4
 is in progress on the CV-production branch. No website deployment has been
 performed.
+
+## Security workflow follow-up
+
+CodeQL advanced-setup PR [#8](https://github.com/lutfim22/portfolio/pull/8) is
+merged. CV PR #7 has been refreshed onto the updated main so it inherits the
+pinned runner and action references. Premium finalization still requires the
+owner-supplied headshot; this security migration does not imply CV approval or
+website deployment.
