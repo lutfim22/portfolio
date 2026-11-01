@@ -1,8 +1,8 @@
 # Milestone 2 — Design proposal 01
 
-Status: the owner approved the visual direction in chat. This focused design PR
-retains the foundation homepage and delivers the review routes separately.
-GitHub merge approval and deployment remain separate.
+Status: the owner approved this design direction in chat and authorized the next
+milestone. The approved design now powers `/en` and `/id`; the proposal routes
+remain available for reference. No merge or deployment is implied.
 
 ## Review images and interactive routes
 
@@ -86,16 +86,18 @@ also inspect rendered pages; neither is a full WCAG conformance audit.
 - Timeline: category filtering works. Each chapter opens a native dialog, shown
   as a side panel on desktop and a bottom sheet on mobile. Escape closes it and
   restores focus. Essential chapter text remains in native disclosures when
-  JavaScript is unavailable. Year filtering and complete core content remain in Milestone 3.
-- Projects: native disclosures reveal approved contribution summaries. Full localized case-study pages remain in Milestone 3.
+  JavaScript is unavailable. Year filtering is now available alongside category filtering in the shared
+  timeline as part of Milestone 3.
+- Projects: native disclosures reveal approved contribution summaries. The core homepage now links to full localized case-study routes; the retained
+  proposal keeps its original contribution disclosures.
 - Contact: approved email, GitHub, and LinkedIn destinations; no contact form.
 
 ## Review decisions
 
 Please review the overall composition, text density, typography, dark/light
 palettes, artwork, mobile layout, bilingual wording, and timeline interaction.
-The owner approved the direction. Final homepage promotion remains a separate
-core-content PR so it can be reviewed independently.
+Approval of this direction was received before Milestone 3. Further revisions
+can build on the retained prototype and design-system reference.
 
 ## Verification and limits
 

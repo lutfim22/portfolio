@@ -1,17 +1,23 @@
 import Link from "next/link";
 import { Arrow } from "@/design/icons";
-import { type Locale, localizedPath } from "@/lib/i18n";
+import { type Locale, localizedPath, projectSlugs } from "@/lib/i18n";
 import { reviewContent } from "@/design/content";
 import { ReviewHeader } from "@/design/header";
 import { OrbitArtwork, ProjectArtwork } from "@/design/artwork";
 import { Journey } from "@/design/journey";
 
-export function Homepage({ locale }: { locale: Locale }) {
+export function Homepage({
+  locale,
+  preview = false,
+}: {
+  locale: Locale;
+  preview?: boolean;
+}) {
   const c = reviewContent[locale];
   return (
     <>
-      <ReviewHeader locale={locale} page="prototype" />
-      <main id="review-main" tabIndex={-1}>
+      <ReviewHeader locale={locale} page={preview ? "prototype" : "home"} />
+      <main id={preview ? "review-main" : "main"} tabIndex={-1}>
         <section
           className="review-hero ds-container"
           aria-labelledby="hero-title"
@@ -70,12 +76,37 @@ export function Homepage({ locale }: { locale: Locale }) {
                 <ProjectArtwork index={index} />
                 <p className="project-category">{project.category}</p>
                 <h3>
-                  {project.title}
-                  <Arrow />
+                  {preview ? (
+                    <>
+                      {project.title}
+                      <Arrow />
+                    </>
+                  ) : (
+                    <Link
+                      href={localizedPath(
+                        locale,
+                        `projects/${projectSlugs[index]}`,
+                      )}
+                    >
+                      {project.title}
+                      <Arrow />
+                    </Link>
+                  )}
                 </h3>
                 <p className="project-description">{project.description}</p>
                 <p className="project-stack">{project.stack}</p>
-
+                {!preview && (
+                  <Link
+                    className="case-study-link ds-text-link"
+                    href={localizedPath(
+                      locale,
+                      `projects/${projectSlugs[index]}`,
+                    )}
+                  >
+                    {locale === "en" ? "Read case study" : "Baca studi kasus"}
+                    <Arrow />
+                  </Link>
+                )}
                 <details className="contribution">
                   <summary>{c.projectDetails}</summary>
                   <p>{project.detail}</p>
@@ -96,6 +127,17 @@ export function Homepage({ locale }: { locale: Locale }) {
               <p>{c.journeyIntro}</p>
             </div>
             <Journey locale={locale} />
+            {!preview && (
+              <Link
+                className="ds-text-link journey-more"
+                href={localizedPath(locale, "journey")}
+              >
+                {locale === "en"
+                  ? "Explore my journey"
+                  : "Jelajahi perjalanan saya"}
+                <Arrow />
+              </Link>
+            )}
           </div>
         </section>
         <section

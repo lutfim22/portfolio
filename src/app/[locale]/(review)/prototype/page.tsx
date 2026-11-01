@@ -14,5 +14,5 @@ export default async function Prototype({
 }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  return <Homepage locale={locale} />;
+  return <Homepage locale={locale} preview />;
 }

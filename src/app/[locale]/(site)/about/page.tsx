@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageShell } from "@/components/page-shell";
+import { SiteShell } from "@/components/site-shell";
 import { loadAbout } from "@/content/about";
 import { siteContent } from "@/content/site";
 import { isLocale } from "@/lib/i18n";
@@ -24,10 +24,10 @@ export default async function About({
   if (!isLocale(locale)) notFound();
   const Content = await loadAbout(locale);
   return (
-    <PageShell locale={locale} page="about">
-      <article className="prose">
+    <SiteShell locale={locale} page="about">
+      <article className="content-prose">
         <Content />
       </article>
-    </PageShell>
+    </SiteShell>
   );
 }

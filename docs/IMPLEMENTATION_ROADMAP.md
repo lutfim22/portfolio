@@ -1,12 +1,12 @@
 # Implementation Roadmap — Codex Execution Plan
 
-Status: The public `lutfim22/portfolio` repository exists, and all five planning documents are approved as the documentation baseline. PR #1 is merged. The Milestone 1 foundation is implemented on its focused branch and prepared for PR review. Merge and deployment remain separate approvals.
+Status: The documentation baseline is merged. The owner approved the Milestone 2 design direction and authorized the next milestone. Milestone 3 core pages and bilingual case studies are implemented on `feat/core-portfolio` and delivered in a dependent draft PR. Vercel integration, merge, and production deployment remain pending.
 
 ## Repository and Governance
 - Repository: `github.com/lutfim22/portfolio` (created; public).
 - Visibility: public from day one, following public-safety review.
 - Initial commit completed: README, `.gitignore`, and minimal repository setup.
-- PR #1: five approved Markdown planning documents, merged.
+- PR #1: five approved Markdown planning documents, merged as the documentation baseline.
 - Feature branches, focused PRs, clear acceptance criteria, CI, preview deployments, and explicit owner approval for merge.
 - Never publish unverified content or secrets. Use English for repository docs, code, PR descriptions, and commits.
 
@@ -16,7 +16,7 @@ Status: The public `lutfim22/portfolio` repository exists, and all five planning
 Tasks:
 1. Completed: create public `lutfim22/portfolio` repository with README and `.gitignore`.
 2. Completed: add public-safe documentation on `docs/initial-documentation`.
-3. Completed: documentation PR #1 merged as `6f2fb5c`.
+3. Completed: documentation PR #1 merged as commit `6f2fb5c`.
 
 Acceptance:
 - Exactly approved files are committed; no confidential or unverified facts.
@@ -27,23 +27,35 @@ Acceptance:
 **Dependencies:** documentation PR reviewed and approved for merge; explicit owner authorization to begin application implementation.
 
 Tasks:
-1. Bootstrap Next.js + React + TypeScript + Tailwind v4.
-2. Establish lint, typecheck, unit tests, formatting, CI, and environment handling.
-3. Set up `/en` and `/id` routing, typed content model, MDX content loading.
-4. Configure GitHub PR previews on Vercel only after deployment authorization.
+1. Implemented locally: Next.js + React + TypeScript + Tailwind v4 foundation.
+2. Implemented locally: lint, typecheck, unit tests, formatting, GitHub Actions CI definition, and documented environment handling (no secrets required). CI execution on GitHub remains unverified until the branch is pushed.
+3. Implemented locally: `/en` and `/id` routing, page-preserving language links, typed UI content, and repository-authored MDX About pages.
+4. Pending: GitHub PR previews on Vercel after deployment authorization and available service access.
 
 Acceptance:
 - Clean CI, deterministic local build, no exposed secrets, accessible page skeleton.
 - Both locale routes load and language switching preserves page context.
 
+Local validation: lint, typecheck, foundation unit tests, formatting, production build, and
+HTTP smoke checks for redirect, four localized pages, MDX rendering, language
+links, landmarks, and four 404 paths. The full visual design and manual browser
+accessibility validation remain later work.
+
+Milestone 2 design direction was approved by the owner in chat. The approved
+composition now powers `/en` and `/id`; noindex review routes remain available
+at `/en/design`, `/id/design`, `/en/prototype`, and `/id/prototype`.
+
+Package manager: pnpm 12.16.1 (latest stable at verification), pinned in
+`packageManager`; CI and documentation use frozen pnpm installs.
+
 ## Milestone 2 — Design System and Homepage Approval
 **Dependencies:** foundation ready; owner approves design direction.
 
 Tasks:
-1. Define theme tokens, typography, layout primitives, and reusable UI components.
-2. Produce high-fidelity homepage mockups for mobile/desktop, dark/light.
-3. Build interactive prototype for navigation, theme, language, and timeline behavior.
-4. Request owner review before implementing the complete homepage.
+1. Implemented for review: contrast-checked theme tokens, self-hosted Space Grotesk/Geist, layout primitives, navigation, theme controls, and abstract SVG artwork.
+2. Implemented for review: responsive homepage prototype and captured mobile/desktop images in dark/light. See `docs/design-review/README.md`.
+3. Implemented for review: navigation, persisted/system theme, page-preserving language links, category filtering, native timeline side-panel/bottom-sheet dialog, and no-JavaScript disclosures.
+4. Completed: owner approved the concrete proposal in chat ("good, next") before Milestone 3 implementation.
 
 Acceptance:
 - Accessible contrast and focus, reduced motion, responsive content, documented design decisions.
@@ -53,14 +65,18 @@ Acceptance:
 **Dependencies:** design approval and public-safe project content approval.
 
 Tasks:
-1. Implement homepage sections in approved order.
-2. Build About, Contact, Engineering Journey, and project templates.
-3. Add Family Care iOS, Virtual Home, and Air Care case studies in EN/ID.
-4. Create approved abstract visual assets; no proprietary screenshots.
+1. Implemented locally: homepage sections in the approved order, with real case-study and core-page links.
+2. Implemented locally: themed About, Contact, Engineering Journey, and shared case-study template. Year/category filters include an empty state and keyboard-accessible dialogs.
+3. Implemented locally: Family Care iOS, Virtual Home, and Air Care MDX case studies in EN/ID, based on approved profile facts.
+4. Reused the abstract SVG artwork from the approved design; no proprietary screenshots.
 
 Acceptance:
 - No fabricated outcomes; accessible interactive timeline; consistent localized content.
 - Core routes and navigation pass functional tests.
+
+Validation and fact-source mapping: `docs/CORE_CONTENT.md`. Final editorial
+publication review, CV production, cross-browser quality checks, and deployment
+remain later work; no launch is implied by local completion.
 
 ## Milestone 4 — CV Production
 **Dependencies:** approved CV source and owner-supplied headshot for Premium CV.
@@ -102,17 +118,9 @@ Acceptance:
 ## Suggested GitHub Milestones
 Documentation & Setup → Foundation → Design Approval → Core Experience → CV Delivery → Quality & Launch.
 
-## PR delivery
+## Milestone PR status
 
-Follow [the PR workflow](PR_WORKFLOW.md). The foundation PR includes the pinned
-pnpm release and lockfile, CI configuration, localized routes, and MDX. Later
-milestones must be delivered in their own focused PRs; local completion and
-chat approval do not replace GitHub review and merge approval.
-
-## Milestone 2 delivery
-
-The owner approved the concrete design direction. A dependent design PR includes
-the tokens, self-hosted fonts, reference routes, responsive homepage prototype,
-theme persistence, timeline category filtering, native dialogs, SVG artwork, and
-browser/accessibility tests. The foundation homepage remains separate until the
-core content PR. Approval of the visual proposal is not GitHub merge approval.
+Milestone 0 was merged in PR #1. Milestones 1, 2, and 3 now have focused stacked
+draft PRs. See [PR delivery rules](PR_WORKFLOW.md) for the complete milestone
+mapping, review gates, dependency order, and future CV/quality work. Chat
+approval of a visual direction does not authorize a GitHub merge or deployment.

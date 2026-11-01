@@ -10,7 +10,9 @@ export function DesignSurface({ children }: { children: React.ReactNode }) {
       <style>{themeCss}</style>
       <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
       <noscript>
-        <style>{".theme-toggle { display: none !important; }"}</style>
+        <style>
+          {".theme-toggle, .journey-filter { display: none !important; }"}
+        </style>
       </noscript>
       <div className="design-surface">{children}</div>
     </>

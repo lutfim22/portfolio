@@ -992,3 +992,148 @@
   vertical-align: middle;
   flex-shrink: 0;
 }
+
+/* Approved design applied to the core portfolio routes. */
+.design-surface .content-page {
+  width: min(calc(100% - var(--ds-space) * 2), 1320px);
+  margin-inline: auto;
+  padding-block: clamp(3rem, 7vw, 7rem);
+  min-height: 75dvh;
+}
+.content-page h1 {
+  font-size: clamp(2.7rem, 5.5vw, 5.5rem);
+  line-height: 1.08;
+  max-width: 23ch;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+}
+.page-heading {
+  margin-bottom: 3.5rem;
+}
+.page-lead {
+  color: var(--ds-muted);
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  max-width: 60ch;
+  margin-top: 2rem;
+}
+.content-prose {
+  max-width: 70ch;
+}
+.content-prose p {
+  color: var(--ds-muted);
+  margin-block: 1.3rem;
+}
+.content-prose h1 {
+  margin-bottom: 2.5rem;
+}
+.content-prose h2 {
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  margin-block: 3rem 1.2rem;
+}
+.content-prose h3 {
+  font-size: 1.4rem;
+  margin-block: 2rem 1rem;
+}
+.content-prose ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+.content-prose li {
+  margin-block: 0.6rem;
+}
+.content-prose a {
+  color: var(--ds-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+.review-project h3 > a {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.case-study-link {
+  color: var(--ds-accent);
+}
+.journey-more {
+  margin-top: 2rem;
+}
+.journey-filter {
+  flex-wrap: wrap;
+}
+.journey-status {
+  color: var(--ds-muted);
+  font-size: 0.9rem;
+}
+.desktop-nav a[aria-current="page"],
+.mobile-nav nav a[aria-current="page"] {
+  color: var(--ds-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+.back-link {
+  color: var(--ds-muted);
+  margin-bottom: 3rem;
+}
+.case-header {
+  max-width: 70rem;
+}
+.case-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  padding-block: 3rem;
+  margin-block: 3rem;
+  border-block: 1px solid var(--ds-border);
+}
+.case-intro dt {
+  color: var(--ds-muted);
+  font-size: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.case-intro dd {
+  margin: 0 0 2rem;
+  font-size: 1rem;
+}
+.case-intro .project-art {
+  max-height: 24rem;
+}
+.case-next {
+  margin-top: 4rem;
+  border-top: 1px solid var(--ds-border);
+  padding-top: 2rem;
+}
+.case-next > span {
+  display: block;
+  margin-bottom: 1rem;
+}
+.case-next > a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  font-family: "Space Grotesk Variable", sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.2;
+}
+@media (max-width: 700px) {
+  .case-intro {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-block: 2rem;
+    margin-block: 2rem;
+  }
+  .journey-filter {
+    gap: 0.5rem;
+    justify-content: start;
+  }
+  .journey-filter select {
+    max-width: 9rem;
+    padding-inline: 0.5rem;
+  }
+  .content-page h1 {
+    font-size: clamp(2.5rem, 9vw, 4rem);
+  }
+}
