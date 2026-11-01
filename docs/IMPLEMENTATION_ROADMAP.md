@@ -1,22 +1,22 @@
 # Implementation Roadmap — Codex Execution Plan
 
-Status: Planning only. Do not create, push, deploy, or merge without explicit owner authorization.
+Status: The public `lutfim22/portfolio` repository exists, and all five planning documents are approved as the documentation baseline. PR #1 awaits review and merge approval. Application implementation and production deployment are not yet authorized.
 
 ## Repository and Governance
-- Planned repository: `github.com/lutfim22/portfolio` (not yet created).
-- Visibility: public from day one, only after public-safety review.
-- Initial commit: README, `.gitignore`, and minimal repository setup.
-- PR #1: five Markdown planning documents; owner reviews before merge.
+- Repository: `github.com/lutfim22/portfolio` (created; public).
+- Visibility: public from day one, following public-safety review.
+- Initial commit completed: README, `.gitignore`, and minimal repository setup.
+- PR #1: five approved Markdown planning documents; draft awaiting review and merge approval.
 - Feature branches, focused PRs, clear acceptance criteria, CI, preview deployments, and explicit owner approval for merge.
 - Never publish unverified content or secrets. Use English for repository docs, code, PR descriptions, and commits.
 
 ## Milestone 0 — Documentation and Repository Setup
-**Dependencies:** owner approves all five Markdown files and authorizes GitHub actions.
+**Dependencies met:** owner approved all five Markdown files as the documentation baseline and authorized repository bootstrap and the documentation PR.
 
 Tasks:
-1. Create public `lutfim22/portfolio` repository with README and `.gitignore`.
-2. Add public-safe documentation on a feature branch.
-3. Open documentation PR with checklist and summary; obtain approval.
+1. Completed: create public `lutfim22/portfolio` repository with README and `.gitignore`.
+2. Completed: add public-safe documentation on `docs/initial-documentation`.
+3. Opened: documentation PR #1 with checklist and summary. Pending: owner review and merge approval.
 
 Acceptance:
 - Exactly approved files are committed; no confidential or unverified facts.
@@ -24,7 +24,7 @@ Acceptance:
 - No application code is needed in documentation PR.
 
 ## Milestone 1 — Application Foundation
-**Dependencies:** documentation PR approved.
+**Dependencies:** documentation PR reviewed and approved for merge; explicit owner authorization to begin application implementation.
 
 Tasks:
 1. Bootstrap Next.js + React + TypeScript + Tailwind v4.

@@ -21,7 +21,7 @@ Brings a combination of hands-on engineering, cross-functional collaboration, an
 Focused on transforming complex product needs into reliable, maintainable, and user-centered web experiences.
 
 ## Work Experience
-**Engineer, Web Application (Software Engineer)** — Samsung Research & Development Indonesia (SRIN)  
+**Engineer, Web Application (Software Engineer)** — Samsung Research & Development Indonesia (SRIN)\
 Jakarta, Indonesia | 2019 – Present
 
 - Served as Tech Lead for SmartThings Family Care for iOS, combining hands-on development of onboarding and location features with technical coordination, code reviews, and on-schedule delivery of two major releases.
@@ -55,7 +55,7 @@ An IoT-enabled air-quality management experience integrating environmental data,
 **Tech Stack:** JavaScript · TypeScript · LitElement · REST APIs · IoT Integration · Chart.js
 
 ## Education
-**Universitas Indonesia** — Bachelor of Engineering in Computer Engineering  
+**Universitas Indonesia** — Bachelor of Engineering in Computer Engineering\
 2015 – 2019 | Indonesia
 
 ## Research Experience
