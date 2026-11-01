@@ -53,11 +53,12 @@ deployment still require explicit authorization.
 | Milestone | PR | Base | Status |
 | --- | --- | --- | --- |
 | 0 — Documentation | [#1](https://github.com/lutfim22/portfolio/pull/1) | main | Merged |
-| 1 — Foundation | [#3](https://github.com/lutfim22/portfolio/pull/3) | main | Draft; owner merge review pending |
-| 2 — Design | [#4](https://github.com/lutfim22/portfolio/pull/4) | feat/application-foundation | Draft; visual direction approved, merge review pending |
+| 1 — Foundation | [#3](https://github.com/lutfim22/portfolio/pull/3) | main | Merged |
+| 2 — Design | [#4](https://github.com/lutfim22/portfolio/pull/4) | main | Draft; visual direction approved, merge review pending |
 | 3 — Core content | [#5](https://github.com/lutfim22/portfolio/pull/5) | feat/design-prototype | Draft; content and merge review pending |
 | 4 — CVs | Not started | Depends on reviewed core content | Create focused PR(s) when ready |
 | 5 — Quality/launch | Not started | Depends on reviewed core content/CVs | Create quality/configuration PR(s); deployment needs separate approval |
 
-Review the stack in order #3 → #4 → #5. The code and delivery rules are committed;
-no PR has been merged and no website deployment has been performed in this task.
+Foundation PR #3 is merged. Design PR #4 has been restacked onto main; core PR
+#5 remains stacked on the design branch. Review and merge #4 before #5. No
+website deployment has been performed.

@@ -1,6 +1,6 @@
 # Implementation Roadmap — Codex Execution Plan
 
-Status: The documentation baseline is merged. The owner approved the Milestone 2 design direction and authorized the next milestone. Milestone 3 core pages and bilingual case studies are implemented on `feat/core-portfolio` and delivered in a dependent draft PR. Vercel integration, merge, and production deployment remain pending.
+Status: The documentation baseline and foundation PR #3 are merged. The owner approved the Milestone 2 design direction and authorized the next milestone. Milestone 3 core pages and bilingual case studies are implemented on `feat/core-portfolio` and delivered in a dependent draft PR. Vercel integration, merge, and production deployment remain pending.
 
 ## Repository and Governance
 - Repository: `github.com/lutfim22/portfolio` (created; public).
