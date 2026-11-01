@@ -56,7 +56,7 @@ deployment still require explicit authorization.
 | 1 — Foundation | [#3](https://github.com/lutfim22/portfolio/pull/3) | main | Merged |
 | 2 — Design | [#4](https://github.com/lutfim22/portfolio/pull/4) | main | Merged |
 | 3 — Core content | [#5](https://github.com/lutfim22/portfolio/pull/5) | main | Merged |
-| 4 — CVs | Focused CV-production PR | main | ATS ready for review; Premium draft awaiting headshot |
+| 4 — CVs | [#7](https://github.com/lutfim22/portfolio/pull/7) | main | Draft; ATS ready for review, Premium awaiting headshot |
 | 5 — Quality/launch | Not started | Depends on reviewed core content/CVs | Create quality/configuration PR(s); deployment needs separate approval |
 
 Foundation PR #3, design PR #4, and core-content PR #5 are merged. Milestone 4

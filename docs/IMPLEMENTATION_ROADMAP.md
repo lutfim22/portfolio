@@ -123,6 +123,7 @@ Documentation & Setup → Foundation → Design Approval → Core Experience →
 Milestone 0 was merged in PR #1. Foundation [#3](https://github.com/lutfim22/portfolio/pull/3)
 and design [#4](https://github.com/lutfim22/portfolio/pull/4) are merged.
 Core-content [#5](https://github.com/lutfim22/portfolio/pull/5) is also merged.
-CV production is the next focused PR against main. See [PR delivery rules](PR_WORKFLOW.md) for the complete milestone
+CV production is delivered for review in [#7](https://github.com/lutfim22/portfolio/pull/7)
+against main. Final Premium delivery remains blocked on the headshot. See [PR delivery rules](PR_WORKFLOW.md) for the complete milestone
 mapping, review gates, dependency order, and future CV/quality work. Chat
 approval of a visual direction does not authorize a GitHub merge or deployment.
