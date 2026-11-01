@@ -1,27 +1,33 @@
 # Luthfi Musthafa — Engineering Portfolio
 
-Milestone 1 foundation: Next.js App Router, React, TypeScript, Tailwind CSS v4,
-localized English/Indonesian routes, and repository-authored MDX.
+Bilingual personal engineering portfolio built with Next.js App Router, React,
+TypeScript, Tailwind CSS v4, and repository-authored MDX.
 
 ## Development
 
-Use Node.js 24 and pnpm 12.16.1, pinned in `packageManager`.
+Use Node.js 24 (see `.nvmrc`) and pnpm 12.16.1 (pinned in `packageManager`). No secrets, database, or environment variables
+are required. `.env.example` documents the environment boundary; never expose
+secrets through `NEXT_PUBLIC_` variables.
+
+If pnpm is not available, enable it with `corepack enable pnpm` first. Verify
+`pnpm --version` matches `packageManager`. In this cloud environment the bundled
+fallback is older, so use `corepack pnpm <command>` with a writable
+`COREPACK_HOME` (for example `/tmp/portfolio-corepack`) to run the pinned release.
 
 ```sh
+cd /workspace/portfolio
 pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-In a cloud task use the existing isolated checkout; no extra Git worktree is
-needed. If the environment supplies an older pnpm fallback, use
-`COREPACK_HOME=/tmp/portfolio-corepack corepack pnpm <command>` to invoke the pin.
-No secrets, database, or environment variables are required. `.env.example`
-documents the environment boundary. Dependencies use a local ignored pnpm store.
+Use the existing checkout in cloud tasks; each task already has an isolated
+environment, so no extra Git worktree is needed. The development server uses port 3000. Live processes must be restarted in a fresh task.
 
-`/` redirects to `/en`. `/en`, `/id`, `/en/about`, and `/id/about` provide a minimal
-accessible foundation. Language links retain the current page, and unknown
-locales/pages return 404. Styling is a skeleton pending the design milestone.
-MDX is executable content: compile reviewed repository files only.
+`/` redirects to `/en`. Both `/en` and `/id` provide the approved homepage,
+`/about`, `/contact`, `/journey`, and `/projects/{family-care,virtual-home,air-care}`.
+The language switch preserves the current page. Unsupported locales and missing
+pages return 404. Localized document language, metadata, navigation labels, and
+content are defined together with typed dictionaries.
 
 ## Validation
 
@@ -34,33 +40,72 @@ pnpm build
 pnpm test:smoke
 ```
 
-The smoke test starts and stops its own production server on port 3100 and
-checks redirects, locale markup, page-preserving language links, local MDX,
-landmarks, and 404s. The same commands are configured in GitHub Actions.
+The smoke test starts and stops its own production server on port 3100. It checks
+the default redirect, fourteen localized core pages, MDX case-study sections,
+language-switch targets, semantic landmarks, and invalid locale/project 404s. Port 3100 must be free. GitHub Actions runs
+these same checks. To run the production app manually, use `pnpm build` and
+`pnpm start`.
 
-## Delivery
+## Content and scope
 
-Follow [the PR workflow](docs/PR_WORKFLOW.md). Create focused milestone PRs as
-work becomes reviewable; design approval does not authorize a PR merge.
-Use separate approval for preview/production deployment. Vercel is not configured.
+- `src/content/site.ts`: localized site metadata.
+- `src/design/content.ts`: shared bilingual homepage and timeline copy.
+- `src/content/projects/`: typed project metadata and localized MDX case studies.
+- `src/content/about/*.mdx`: local MDX content, compiled during the build.
+- `src/lib/i18n.ts`: supported locales and route helpers.
+- `docs/`: approved planning baseline, professional facts, and review requirements.
 
-## Milestone 2 — Approved design proposal
+MDX is executable content: only compile reviewed repository files, never remote
+or user-supplied MDX. The homepage uses the owner-approved Milestone 2 design. Core pages and six
+localized MDX case studies are implemented. CV production and launch checks
+remain later milestones. No external fonts or runtime API access are
+needed for the foundation build.
 
-The owner approved proposal 01's visual direction in chat. `/en/prototype` and
-`/id/prototype` retain the responsive homepage prototype; `/en/design` and
-`/id/design` show palette and typography specimens. Review routes are noindex.
-The foundation homepage and About routes are retained pending the next PR.
+Vercel preview integration and production deployment are not configured. They
+remain separate deployment tasks; environment publication does not publish this
+website. No merge or deployment is performed by local validation.
 
-The design adds self-hosted Space Grotesk/Geist, contrast-tested themes, bilingual
-navigation, theme persistence, category-filtered timeline dialogs, and abstract
-SVG artwork. Native disclosures preserve essential content without JavaScript.
-See [the design guide](docs/design-review/README.md) for review captures.
+## Milestone 2 design review
 
-Run `pnpm exec playwright install chromium` then `pnpm test:browser` after a build.
-For the cloud Chromium binary, set
-`PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium`. The runner owns its server
-on port 3120 and captures desktop/mobile variants in both themes. Automated axe
-and Chromium checks are not a complete WCAG or cross-browser audit.
+`/en/prototype` and `/id/prototype` contain the homepage design proposal.
+`/en/design` and `/id/design` show the proposed design system and components.
+These retained review routes are marked noindex. The approved direction has
+been promoted to the homepage as part of Milestone 3.
+Both themes and languages are available, with local font files and abstract
+project illustrations. The owner approved the design direction before Milestone 3 implementation.
 
-This PR depends on the foundation PR. Design approval does not authorize merging
-this PR, deploying the website, or publishing unreviewed new professional claims.
+See [the review guide](docs/design-review/README.md) for images and decisions.
+
+After building, run the real-browser and automated accessibility checks:
+
+```sh
+pnpm exec playwright install chromium
+pnpm test:browser
+```
+
+If Chromium is already installed in the cloud environment, use
+`PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium pnpm test:browser`.
+The runner starts and stops its own production server on port 3120. It captures
+review images at desktop and mobile sizes in both themes. Chromium checks do not
+establish cross-browser compatibility or a complete WCAG audit.
+
+## Milestone 3 content and validation
+
+Homepage case-study links lead to three public-safe projects, each available in
+English and Indonesian. Case-study facts are drawn from
+`docs/PROFESSIONAL_PROFILE.md`; the source mapping and review limits are in
+[the content notes](docs/CORE_CONTENT.md). Unknown project slugs return 404 before
+content lookup. Local MDX imports are explicitly allowlisted.
+
+The Journey page and homepage timeline share year/category filters, an empty
+state, keyboard-accessible native dialogs, and no-JavaScript disclosures.
+The shared page shell retains the current page or case-study slug when changing
+language and preserves the theme across navigation. Core browser tests verify
+both languages, local links, mobile layout, and automated accessibility checks.
+
+## Pull requests
+
+Follow [the PR workflow](docs/PR_WORKFLOW.md). Milestones 1–3 are delivered as
+stacked draft PRs, each with independent validation. Chat design approval is
+separate from GitHub merge approval. Review the foundation before the design,
+then the core-content PR; merge and deployment require owner authorization.

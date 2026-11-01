@@ -4,7 +4,13 @@ import { Arrow } from "./icons";
 
 import Link from "next/link";
 import { useRef } from "react";
-import { languageNames, locales, localizedPath, type Locale } from "@/lib/i18n";
+import {
+  languageNames,
+  locales,
+  localizedPath,
+  type Locale,
+  type Page,
+} from "@/lib/i18n";
 import { reviewContent } from "./content";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -13,12 +19,15 @@ export function ReviewHeader({
   page = "prototype",
 }: {
   locale: Locale;
-  page?: "prototype" | "design";
+  page?: Page;
 }) {
   const c = reviewContent[locale];
-  const review = true;
-  const home = "prototype";
-  const navHref = (id: string) => `${localizedPath(locale, "prototype")}#${id}`;
+  const review = page === "prototype" || page === "design";
+  const home = review ? "prototype" : "home";
+  const navHref = (id: string) =>
+    review || id === "work"
+      ? `${localizedPath(locale, home)}#${id}`
+      : localizedPath(locale, id as "journey" | "about" | "contact");
   const menu = useRef<HTMLDetailsElement>(null);
   const links = [
     ["work", c.work],

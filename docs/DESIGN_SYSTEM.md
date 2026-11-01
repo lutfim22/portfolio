@@ -1,6 +1,6 @@
 # Portfolio Design System
 
-Status: The owner approved proposal 01 in chat. Tokens, self-hosted fonts, the responsive prototype, and abstract artwork are delivered in a focused design PR; GitHub merge approval remains separate.
+Status: The owner approved Milestone 2 proposal 01 in chat before authorizing Milestone 3. The approved direction, tokens, typography, and abstract artwork now power the core portfolio pages.
 
 ## Identity
 **Premium Hybrid / Engineering Journey** — modern editorial clarity with subtle futuristic depth. The visual language should feel crafted and technically credible, not like a generic template.
@@ -55,4 +55,10 @@ Status: The owner approved proposal 01 in chat. Tokens, self-hosted fonts, the r
 
 Exact colors, spacing scales, and interaction durations are implementation proposals requiring visual validation, not preapproved facts.
 
-Concrete specimens and contrast evidence: [design review guide](design-review/README.md).
+## Milestone 2 proposal 01
+
+A concrete specification, review images, interaction notes, and validation limits
+are available in [the design review guide](design-review/README.md). The proposed
+tokens live in `src/design/tokens.ts`; the executable specimen is at `/en/design`
+and `/id/design`. The owner approved this proposal in chat. The same shared surface and navigation
+now power the core pages; the review routes remain for reference.

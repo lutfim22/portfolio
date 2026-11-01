@@ -44,31 +44,81 @@ try {
   console.log("PASS / redirects to /en");
 
   for (const locale of ["en", "id"]) {
-    for (const suffix of ["", "/about"]) {
-      const response = await fetch(`${origin}/${locale}${suffix}`);
-      assert.equal(response.status, 200);
+    for (const page of [
+      "",
+      "/about",
+      "/journey",
+      "/contact",
+      "/projects/family-care",
+      "/projects/virtual-home",
+      "/projects/air-care",
+    ]) {
+      const path = `/${locale}${page}`;
+      const response = await fetch(`${origin}${path}`);
+      assert.equal(response.status, 200, path);
       const html = await response.text();
-      const other = locale === "en" ? "id" : "en";
-      for (const marker of [
-        `<html lang="${locale}"`,
-        'id="main"',
-        'href="#main"',
-        `href="/${other}${suffix}"`,
-      ])
-        assert.ok(html.includes(marker), marker);
-      if (suffix)
+      assert.ok(
+        html.includes(`<html lang="${locale}"`),
+        `${path}: document language`,
+      );
+      assert.ok(html.includes('id="main"'), `${path}: main landmark`);
+      assert.ok(html.includes('href="#main"'), `${path}: skip link`);
+      const alternate = locale === "en" ? "id" : "en";
+      assert.ok(
+        html.includes(`href="/${alternate}${page}"`),
+        `${path}: language switch preserves page`,
+      );
+      assert.equal(
+        (html.match(/<h1(?:\s|>)/g) ?? []).length,
+        1,
+        `${path}: one page heading`,
+      );
+      assert.ok(
+        html.includes('class="design-surface"'),
+        `${path}: approved design applied`,
+      );
+      assert.ok(
+        !html.includes('content="noindex'),
+        `${path}: review metadata does not leak`,
+      );
+      if (page === "/about")
         assert.ok(
           html.includes(
             locale === "en"
               ? "Engineering experience"
               : "Pengalaman engineering",
           ),
+          `${path}: MDX rendered`,
         );
-      console.log(`PASS /${locale}${suffix}: localized page and navigation`);
+      if (page.startsWith("/projects/")) {
+        for (const heading of locale === "en"
+          ? ["Problem", "Approach", "Impact"]
+          : ["Tantangan", "Pendekatan", "Dampak"]) {
+          assert.ok(
+            html.includes(`<h2>${heading}</h2>`),
+            `${path}: ${heading} MDX rendered`,
+          );
+        }
+      }
+      assert.ok(
+        !html.includes("NEXT_PUBLIC_"),
+        `${path}: no config instructions rendered`,
+      );
+      console.log(
+        `PASS ${path}: localized HTML, content, navigation, landmarks`,
+      );
     }
   }
-  for (const path of ["/fr", "/fr/about", "/en/missing", "/id/missing"]) {
-    assert.equal((await fetch(`${origin}${path}`)).status, 404);
+  for (const path of [
+    "/fr",
+    "/fr/about",
+    "/en/missing",
+    "/id/missing",
+    "/en/projects/missing",
+    "/id/projects/__proto__",
+  ]) {
+    const response = await fetch(`${origin}${path}`);
+    assert.equal(response.status, 404, path);
     console.log(`PASS ${path}: 404`);
   }
 } catch (error) {

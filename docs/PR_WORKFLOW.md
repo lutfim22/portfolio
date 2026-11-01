@@ -47,3 +47,18 @@ and CI follow-up autonomously. Continue work that does not depend on a missing
 prerequisite. Request owner action only for a real blocker or an explicit review
 gate, with the reason, exact steps, and the work that will resume. Merge and
 deployment still require explicit authorization.
+
+## Current milestone PRs
+
+| Milestone | PR | Base | Status |
+| --- | --- | --- | --- |
+| 0 — Documentation | [#1](https://github.com/lutfim22/portfolio/pull/1) | main | Merged |
+| 1 — Foundation | [#3](https://github.com/lutfim22/portfolio/pull/3) | main | Merged |
+| 2 — Design | [#4](https://github.com/lutfim22/portfolio/pull/4) | main | Merged |
+| 3 — Core content | [#5](https://github.com/lutfim22/portfolio/pull/5) | main | Draft; content and merge review pending |
+| 4 — CVs | Not started | Depends on reviewed core content | Create focused PR(s) when ready |
+| 5 — Quality/launch | Not started | Depends on reviewed core content/CVs | Create quality/configuration PR(s); deployment needs separate approval |
+
+Foundation PR #3 and design PR #4 are merged. Core-content PR #5 is restacked
+onto main and is next for owner content review and merge approval. No website
+deployment has been performed.

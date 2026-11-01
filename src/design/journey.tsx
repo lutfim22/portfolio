@@ -4,17 +4,45 @@ import { Arrow } from "./icons";
 
 import { useRef, useState } from "react";
 import type { Locale } from "@/lib/i18n";
+import { matchesYear } from "@/lib/journey";
 import { reviewContent } from "./content";
 
 export function Journey({ locale }: { locale: Locale }) {
   const c = reviewContent[locale];
   const [filter, setFilter] = useState("all");
+  const [year, setYear] = useState("all");
+  const visible = c.milestones.map(
+    (m) =>
+      (filter === "all" || filter === m.category) && matchesYear(m.year, year),
+  );
+  const years = [
+    ...new Set(c.milestones.flatMap((m) => m.year.match(/\d{4}/g) ?? [])),
+  ]
+    .sort()
+    .reverse();
   const [selected, setSelected] = useState(0);
   const dialog = useRef<HTMLDialogElement>(null);
   const milestone = c.milestones[selected];
   return (
     <>
       <div className="journey-filter">
+        <label htmlFor="journey-year">
+          {locale === "en" ? "Year" : "Tahun"}
+        </label>
+        <select
+          id="journey-year"
+          value={year}
+          onChange={(e) => setYear(e.target.value)}
+        >
+          <option value="all">
+            {locale === "en" ? "All years" : "Semua tahun"}
+          </option>
+          {years.map((y) => (
+            <option key={y} value={y}>
+              {y}
+            </option>
+          ))}
+        </select>
         <label htmlFor="journey-filter">{c.filter}</label>
         <select
           id="journey-filter"
@@ -28,10 +56,7 @@ export function Journey({ locale }: { locale: Locale }) {
       </div>
       <div className="journey-list">
         {c.milestones.map((m, index) => (
-          <details
-            key={m.year}
-            hidden={filter !== "all" && filter !== m.category}
-          >
+          <details key={m.year} hidden={!visible[index]}>
             <summary
               onClick={(e) => {
                 e.preventDefault();
@@ -53,6 +78,13 @@ export function Journey({ locale }: { locale: Locale }) {
           </details>
         ))}
       </div>
+      <p className="journey-status" role="status">
+        {!visible.some(Boolean)
+          ? locale === "en"
+            ? "No chapters match these filters."
+            : "Tidak ada bab yang sesuai dengan filter ini."
+          : ""}
+      </p>
       <dialog
         className="journey-dialog"
         ref={dialog}
