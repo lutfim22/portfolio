@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLocale } from "@/lib/i18n";
@@ -9,10 +10,10 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  return {
+  return pageMetadata(locale, "contact", {
     title: reviewContent[locale].contact,
     description: reviewContent[locale].contactText,
-  };
+  });
 }
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params;

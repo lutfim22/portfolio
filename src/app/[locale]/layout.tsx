@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { seoConfig } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { siteContent } from "@/content/site";
 import { isLocale, locales } from "@/lib/i18n";
@@ -21,6 +22,7 @@ export async function generateMetadata({
       template: `%s | Luthfi Musthafa`,
     },
     description: siteContent[locale].description,
+    robots: { index: seoConfig().indexable, follow: true },
   };
 }
 

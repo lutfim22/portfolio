@@ -21,6 +21,7 @@ next-env.d.ts
 /coverage/
 /playwright-report/
 /test-results/
+/quality-results/
 /.vercel/
 /.turbo/
 

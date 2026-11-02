@@ -56,16 +56,16 @@ deployment still require explicit authorization.
 | 1 — Foundation | [#3](https://github.com/lutfim22/portfolio/pull/3) | main | Merged |
 | 2 — Design | [#4](https://github.com/lutfim22/portfolio/pull/4) | main | Merged |
 | 3 — Core content | [#5](https://github.com/lutfim22/portfolio/pull/5) | main | Merged |
-| 4 — CVs | [#7](https://github.com/lutfim22/portfolio/pull/7) | main | Draft; ATS and asset-driven generator ready, photo deferred |
-| 5 — Quality/launch | Not started | Depends on reviewed core content/CVs | Create quality/configuration PR(s); deployment needs separate approval |
+| 4 — CVs | [#7](https://github.com/lutfim22/portfolio/pull/7) | main | Merged; photo deferred, asset-driven generator ready |
+| 5 — Quality/launch | Quality/SEO review (`feat/quality-seo`) | main | SEO, cross-browser and Lighthouse checks; telemetry/domain/deployment remain separate |
 
-Foundation PR #3, design PR #4, and core-content PR #5 are merged. Milestone 4
-is in progress on the CV-production branch. No website deployment has been
-performed.
+Foundation PR #3, design PR #4, core-content PR #5, and CV PR #7 are merged.
+Milestone 5 quality work is in progress on `feat/quality-seo`. No website
+deployment has been performed.
 
 ## Security workflow follow-up
 
 CodeQL advanced-setup PR [#8](https://github.com/lutfim22/portfolio/pull/8) is
-merged. CV PR #7 has been refreshed onto the updated main so it inherits the
-pinned runner and action references. Photo delivery is deferred; the asset-driven generator is ready for review; this security migration does not imply CV approval or
-website deployment.
+merged. The merged CV work inherits the pinned runner and action references. Photo
+delivery is deferred; the asset-driven generator is ready. This security
+migration does not authorize website deployment.

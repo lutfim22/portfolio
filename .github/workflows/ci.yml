@@ -22,11 +22,22 @@ jobs:
       - run: pnpm cv:check
       - run: pnpm build
       - run: pnpm test:smoke
-      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm exec playwright install --with-deps chromium firefox webkit
       - run: pnpm cv:test
       - run: pnpm cv:generate
       - run: pnpm cv:check
       - run: pnpm test:browser
+      - name: Build with an example origin for launch audits (no deployment)
+        run: pnpm build
+        env:
+          SITE_URL: https://portfolio.example
+          SITE_INDEXABLE: "true"
+      - name: Verify configured SEO in production HTML
+        run: pnpm test:browser seo.spec.ts --project=chromium
+        env:
+          SITE_URL: https://portfolio.example
+          SITE_INDEXABLE: "true"
+      - run: pnpm test:lighthouse
       - uses: actions/upload-artifact@v7.0.2
         if: always()
         with:
@@ -36,3 +47,4 @@ jobs:
             docs/cv-review/*.pdf
             public/cv/*.pdf
             test-results/
+            quality-results/

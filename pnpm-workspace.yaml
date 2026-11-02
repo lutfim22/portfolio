@@ -3,3 +3,6 @@ storeDir: .pnpm-store
 allowBuilds:
   sharp: true
   unrs-resolver: true
+overrides:
+  # GHSA-3g3m-2fjr-6pw4: retain the glob API used by Lighthouse's dev tooling.
+  "@sentry/bundler-plugins>glob": 14.0.2
