@@ -21,6 +21,9 @@ export function SiteShell({
       </main>
       <footer className="review-footer ds-container">
         <span>{c.footer}</span>
+        <Link href={`${localizedPath(locale, "contact")}#privacy`}>
+          {locale === "en" ? "Privacy" : "Privasi"}
+        </Link>
         <Link href={localizedPath(locale, "contact")}>{c.connect}</Link>
       </footer>
     </>

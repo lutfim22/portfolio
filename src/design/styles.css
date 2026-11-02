@@ -621,11 +621,16 @@
 .design-surface .review-footer {
   border-top: 1px solid var(--ds-border);
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 1rem;
   padding-block: 1.7rem;
   font-size: 0.65rem;
   color: var(--ds-muted);
+}
+.privacy-notice {
+  margin-top: 4rem;
+  scroll-margin-top: 7rem;
 }
 .system-page {
   padding-block: 5rem !important;

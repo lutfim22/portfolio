@@ -57,11 +57,12 @@ deployment still require explicit authorization.
 | 2 — Design | [#4](https://github.com/lutfim22/portfolio/pull/4) | main | Merged |
 | 3 — Core content | [#5](https://github.com/lutfim22/portfolio/pull/5) | main | Merged |
 | 4 — CVs | [#7](https://github.com/lutfim22/portfolio/pull/7) | main | Merged; photo deferred, asset-driven generator ready |
-| 5 — Quality/launch | Quality/SEO review (`feat/quality-seo`) | main | SEO, cross-browser and Lighthouse checks; telemetry/domain/deployment remain separate |
+| 5 — Quality/launch | [#9](https://github.com/lutfim22/portfolio/pull/9) | main | Quality/SEO merged; telemetry/build preparation follows on `feat/telemetry-launch-prep`; domain/deployment pending |
 
 Foundation PR #3, design PR #4, core-content PR #5, and CV PR #7 are merged.
-Milestone 5 quality work is in progress on `feat/quality-seo`. No website
-deployment has been performed.
+Milestone 5 quality/SEO PR #9 is merged. Optional telemetry and Vercel build
+preparation proceed on `feat/telemetry-launch-prep`. No website deployment has
+been performed.
 
 ## Security workflow follow-up
 

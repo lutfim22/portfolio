@@ -1,4 +1,5 @@
 import { pageMetadata } from "@/lib/seo";
+import { PrivacyNotice } from "@/components/privacy-notice";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLocale } from "@/lib/i18n";
@@ -40,6 +41,7 @@ export default async function ContactPage({ params }: Props) {
           <Arrow />
         </a>
       </div>
+      <PrivacyNotice locale={locale} />
     </SiteShell>
   );
 }

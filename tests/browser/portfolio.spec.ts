@@ -129,9 +129,10 @@ test("navigation, year/category filtering, empty state and dialog focus", async 
     .getByRole("link", { name: "Contact", exact: true })
     .click();
   await expect(page).toHaveURL(/\/en\/contact$/);
-  await expect(
-    page.getByRole("link", { name: "luthfi.musthafa@gmail.com" }),
-  ).toHaveAttribute("href", "mailto:luthfi.musthafa@gmail.com");
+  await expect(page.locator(".contact-email")).toHaveAttribute(
+    "href",
+    "mailto:luthfi.musthafa@gmail.com",
+  );
 });
 
 test("site theme survives project and locale navigation", async ({ page }) => {

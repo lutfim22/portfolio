@@ -186,6 +186,11 @@ export function Homepage({
       </main>
       <footer className="review-footer ds-container">
         <span>{c.footer}</span>
+        {!preview && (
+          <Link href={`${localizedPath(locale, "contact")}#privacy`}>
+            {locale === "en" ? "Privacy" : "Privasi"}
+          </Link>
+        )}
         <a href="#top">
           {c.top} <Arrow />
         </a>
