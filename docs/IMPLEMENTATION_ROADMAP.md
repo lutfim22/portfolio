@@ -1,6 +1,6 @@
 # Implementation Roadmap — Codex Execution Plan
 
-Status: Documentation, foundation (#3), design (#4), and core content (#5) are merged. Milestone 4 (#7) is merged with an ATS CV, a Premium layout draft, and bilingual download pages. Milestone 5 SEO and quality checks (#9) are merged; optional telemetry and deployment preparation are in progress. The owner deferred the photo: asset-driven generation is ready now; a supplied headshot automatically enables the final Premium PDF later. Website deployment remains pending.
+Status: Documentation, foundation (#3), design (#4), and core content (#5) are merged. Milestone 4 (#7) is merged with an ATS CV, a Premium layout draft, and bilingual download pages. Milestone 5 SEO/quality (#9) and optional telemetry/build preparation (#10) are merged. The owner deferred the photo: asset-driven generation is ready now; a supplied headshot automatically enables the final Premium PDF later. Vercel access and deployment approval remain pending. A new Vercel project's first deployment is Production and requires approval for that actual target.
 
 ## Repository and Governance
 - Repository: `github.com/lutfim22/portfolio` (created; public).
@@ -98,7 +98,7 @@ Tasks:
 1. Merged in PR #9: baseline 63 unit tests, Chromium/Firefox/WebKit functional and automated accessibility checks, plus mobile/desktop review captures. Automated pixel-diff regression and manual assistive-technology/device review remain separate.
 2. Merged in PR #9: responsive/reduced-motion/link checks; per-page bilingual metadata, canonical/hreflang, configured sitemap/robots, generated Open Graph PNGs, and escaped Person structured data. Default/preview builds remain noindex.
 3. Merged in PR #9: repeatable Lighthouse mobile audits with a minimum score of 90 per category and retained HTML/JSON reports. Real-user Core Web Vitals require deployment and traffic; they are not established by lab scores.
-4. Prepared for review: optional Vercel Analytics/Speed Insights, localized privacy disclosure, and limited first-party server error logging. All switches default off; activation requires an indexable Vercel production build and explicit flags. Provider/project configuration and launch approval remain pending. See [telemetry and deployment preparation](TELEMETRY_AND_DEPLOYMENT.md).
+4. Merged in PR #10: optional Vercel Analytics/Speed Insights, localized privacy disclosure, and limited first-party server error logging. All switches default off; activation requires an indexable Vercel production build and explicit flags. Provider/project configuration and deployment approval remain pending. The first deployment of a new Vercel project uses Production, including its environment variables; inspect history and obtain approval for that target. See [telemetry and deployment preparation](TELEMETRY_AND_DEPLOYMENT.md).
 5. Gitleaks history scan passed; domain verification, deployed preview/device/content review, and explicit production approval remain pending. See [quality evidence and launch steps](QUALITY_AND_LAUNCH.md).
 
 Acceptance:
@@ -126,6 +126,6 @@ Core-content [#5](https://github.com/lutfim22/portfolio/pull/5) is also merged.
 CV production merged in [#7](https://github.com/lutfim22/portfolio/pull/7).
 Photo delivery is deferred; the generator workflow is ready. Milestone 5 quality
 work merged in [#9](https://github.com/lutfim22/portfolio/pull/9); telemetry/build
-preparation proceeds on `feat/telemetry-launch-prep`. See [PR delivery rules](PR_WORKFLOW.md) for the complete milestone
+preparation merged in [#10](https://github.com/lutfim22/portfolio/pull/10). See [PR delivery rules](PR_WORKFLOW.md) for the complete milestone
 mapping, review gates, dependency order, and future CV/quality work. Chat
 approval of a visual direction does not authorize a GitHub merge or deployment.
