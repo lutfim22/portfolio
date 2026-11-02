@@ -11,6 +11,7 @@ export type Page =
   | "about"
   | "journey"
   | "contact"
+  | "cv"
   | "prototype"
   | "design"
   | `projects/${ProjectSlug}`;

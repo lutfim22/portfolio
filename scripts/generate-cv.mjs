@@ -1,0 +1,147 @@
+import { readFile, rm } from "node:fs/promises";
+import { join } from "node:path";
+import { cvPaths, option, loadHeadshot, atomicWrite } from "./cv-assets.mjs";
+import { chromium } from "@playwright/test";
+import { loadCvContent } from "./cv-content.mjs";
+
+const c = await loadCvContent();
+const escape = (value) =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+const p = (text) => `<p>${escape(text).replaceAll("\n", "<br>")}</p>`;
+const section = (title, body) => `<section><h2>${title}</h2>${body}</section>`;
+const list = (items) =>
+  `<ul>${items.map((text) => `<li>${escape(text)}</li>`).join("")}</ul>`;
+const summary = section("Professional Summary", c.summary.map(p).join(""));
+const experience = section(
+  "Work Experience",
+  `<h3>${escape(c.work.title)}</h3>${p(c.work.dates)}${list(c.work.bullets)}`,
+);
+const skills = section("Technical Skills", c.skills.map(p).join(""));
+const projects = section(
+  "Selected Projects",
+  c.projects
+    .map(
+      (project) =>
+        `<article><h3>${escape(project.title)}</h3>${project.paragraphs.map(p).join("")}</article>`,
+    )
+    .join(""),
+);
+const education = section("Education", c.education.map(p).join(""));
+const research = section("Research Experience", c.research.map(p).join(""));
+const languages = section("Spoken Languages", c.languages.map(p).join(""));
+const paths = cvPaths(option("output-root"));
+const photo = await loadHeadshot(option("asset-dir"), option("headshot"));
+const finalPremium = Boolean(photo);
+if (process.argv.includes("--final-premium") && !photo)
+  throw new Error(
+    "Put an approved headshot.png or headshot.jpg in assets/cv before generating the final Premium CV.",
+  );
+const headshot = photo ? `<img alt="" src="${photo.dataUrl}">` : "";
+const font = async (path) =>
+  `data:font/woff2;base64,${(await readFile(path)).toString("base64")}`;
+const headingFont = await font(
+  "node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2",
+);
+const bodyFont = await font(
+  "node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2",
+);
+const header = (premium) =>
+  `<header>${premium && headshot ? headshot : ""}<h1>${escape(c.identity.Name)}</h1><p class="headline">${escape(c.identity["Professional headline"])}</p><p class="contact">${escape(c.identity.Location)} · <a href="mailto:${escape(c.identity.Email)}">${escape(c.identity.Email)}</a><br><a href="${escape(c.identity.GitHub)}">${escape(c.identity.GitHub)}</a> · <a href="${escape(c.identity.LinkedIn)}">${escape(c.identity.LinkedIn)}</a></p></header>`;
+const css = `
+@font-face{font-family:Space;src:url('${headingFont}');font-weight:300 700;font-display:block}
+@font-face{font-family:Geist;src:url('${bodyFont}');font-weight:100 900;font-display:block}
+@page{size:A4;margin:0}*{box-sizing:border-box}html,body{margin:0;padding:0;color:#171717;background:white}body{font:9.4pt/1.36 Arial,sans-serif}.sheet{width:210mm;height:297mm;padding:13mm 15mm 16mm;position:relative;break-after:page}.sheet:last-child{break-after:auto}header{border-bottom:1px solid #333;padding-bottom:3mm;margin-bottom:4mm}h1{font-size:23pt;line-height:1.1;margin:0 0 2mm}p{margin:0 0 2.2mm}.headline{font-size:10pt;font-weight:bold}.contact{font-size:8.5pt;line-height:1.5;margin:0}a{color:inherit;text-decoration:none}h2{font-size:11pt;line-height:1.2;margin:4mm 0 2mm;padding-bottom:1mm;border-bottom:1px solid #aaa}h3{font-size:9.8pt;margin:0 0 1.5mm;line-height:1.35}ul{padding-left:4.5mm;margin:2mm 0}li{margin-bottom:1.8mm}article{break-inside:avoid;margin-bottom:4mm}footer{position:absolute;bottom:8mm;left:15mm;right:15mm;font-size:8pt;color:#555;display:flex;justify-content:space-between}.premium{font-family:Geist,Arial,sans-serif;font-size:9pt;line-height:1.4}.premium h1,.premium h2{font-family:Space,Arial,sans-serif}.premium header{border-bottom:2px solid #6636a1}.premium h1{color:#45266b;font-weight:600}.premium h2{color:#6636a1;font-size:11.5pt;border-color:#d9cbe9}.premium a{color:#45266b}.columns{display:grid;grid-template-columns:2.15fr 1fr;gap:6mm}.columns aside{background:#f4f0f8;padding:3mm}.columns aside h2:first-child{margin-top:0}.premium header img{float:right;width:21mm;height:24mm;object-fit:contain;margin-left:5mm}.draft{font-size:7pt;letter-spacing:1px;color:#6636a1;text-align:right;margin-bottom:2mm}.premium .columns h3{font-size:9.2pt}.premium .columns p{margin-bottom:2.1mm}.premium .columns li{margin-bottom:1.5mm}
+`;
+const outputs = [];
+const browser = await chromium.launch({
+  executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
+});
+try {
+  for (const variant of ["ats", "premium"]) {
+    const premium = variant === "premium";
+    const pages = premium
+      ? [
+          `<div class="columns"><div>${summary}${experience}</div><aside>${skills}</aside></div>`,
+          `<div class="columns"><div>${projects}${research}</div><aside>${education}${languages}</aside></div>`,
+        ]
+      : [
+          `${summary}${experience}${skills}`,
+          `${projects}${education}${research}${languages}`,
+        ];
+    const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${escape(c.identity.Name)} — CV</title><style>${css}</style></head><body class="${variant}">${pages.map((body, index) => `<div class="sheet">${premium && !finalPremium ? '<div class="draft">DESIGN DRAFT · HEADSHOT REQUIRED</div>' : ""}${header(premium)}<div class="page-content">${body}</div><footer><span>${escape(c.identity.Name)}</span><span>${index + 1} / 2</span></footer></div>`).join("")}</body></html>`;
+    const page = await browser.newPage();
+    await page.setContent(html);
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      await Promise.all([...document.images].map((image) => image.decode()));
+    });
+    await page.emulateMedia({ media: "print" });
+    const overflow = await page.locator(".sheet").evaluateAll((sheets) =>
+      sheets.map((sheet) => ({
+        overflow: sheet.scrollHeight > sheet.clientHeight + 1,
+        overlap:
+          sheet.querySelector(".page-content").getBoundingClientRect().bottom >
+          sheet.querySelector("footer").getBoundingClientRect().top - 8,
+      })),
+    );
+    if (overflow.some((x) => x.overflow || x.overlap))
+      throw new Error(
+        `${variant}: page content overflows: ${JSON.stringify(overflow)}`,
+      );
+    const path = premium
+      ? finalPremium
+        ? paths.premium
+        : paths.draft
+      : paths.ats;
+    const pdf = await page.pdf({
+      preferCSSPageSize: true,
+      printBackground: true,
+      tagged: true,
+    });
+    outputs.push([path, pdf], [join(paths.review, `${variant}.html`), html]);
+    for (let index = 0; index < 2; index++) {
+      outputs.push([
+        join(paths.review, `${variant}-${index + 1}.png`),
+        await page
+          .locator(".sheet")
+          .nth(index)
+          .screenshot({ animations: "disabled" }),
+      ]);
+    }
+    await page.close();
+  }
+} finally {
+  await browser.close();
+}
+outputs.push([
+  join(paths.review, "FILES.md"),
+  `# Generated CV files
+
+- [ATS CV](../../public/cv/luthfi-musthafa-ats.pdf)
+- ${finalPremium ? "[Premium CV](../../public/cv/luthfi-musthafa-premium.pdf)" : "[Premium draft](luthfi-musthafa-premium-draft.pdf)"}
+- ATS previews: [page 1](ats-1.png), [page 2](ats-2.png)
+- Premium previews: [page 1](premium-1.png), [page 2](premium-2.png)
+
+Generated by pnpm cv:generate. Premium mode: ${finalPremium ? "final, using the supplied asset" : "draft, no photo asset"}.
+`,
+]);
+// Publish only after both layouts decode and fit. Update readiness last.
+for (const [path, data] of outputs) await atomicWrite(path, data);
+await rm(finalPremium ? paths.draft : paths.premium, { force: true });
+await atomicWrite(
+  paths.status,
+  JSON.stringify(
+    { premiumAvailable: finalPremium, headshotSha256: photo?.sha256 ?? null },
+    null,
+    2,
+  ) + "\n",
+);
+console.log(
+  finalPremium
+    ? "Generated ATS and final Premium PDFs; download enabled."
+    : "Generated ATS and Premium draft; add assets/cv/headshot.png or .jpg when ready.",
+);

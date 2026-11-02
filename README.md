@@ -109,3 +109,40 @@ Follow [the PR workflow](docs/PR_WORKFLOW.md). Milestones 1–3 are delivered as
 stacked draft PRs, each with independent validation. Chat design approval is
 separate from GitHub merge approval. Review the foundation before the design,
 then the core-content PR; merge and deployment require owner authorization.
+
+## CV production
+
+`/en/cv` and `/id/cv` provide an English ATS CV download. Both CV layouts are
+built from the same `docs/PROFESSIONAL_PROFILE.md` source. The Premium version
+remains a clearly marked review draft until an approved headshot asset is added.
+
+```sh
+pnpm exec playwright install chromium
+pnpm cv:generate
+pnpm cv:check
+```
+
+Set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium` when using the cloud
+Chromium installation. `cv:check` verifies two A4 pages, selectable text, every
+mapped source fact, ATS reading order, and clickable email/social links.
+Generation rejects overflow and footer overlap. CI checks committed PDFs first,
+then regenerates and validates them using its installed Chromium.
+
+See [CV review notes](docs/cv-review/README.md) for files, validation evidence,
+and the remaining headshot requirement. PDF readability does not establish
+compatibility with every proprietary applicant tracking system.
+
+### Replace the CV photo later
+
+No photo is required now. Later, add **one** `headshot.png`, `headshot.jpg`, or
+`headshot.jpeg` to `assets/cv/`, then run:
+
+```sh
+pnpm cv:refresh
+```
+
+This regenerates and validates both PDFs and rebuilds the site. A valid photo
+creates the final Premium PDF and enables its download automatically. Without a
+photo, Premium remains a marked draft. Removing the asset and rerunning removes
+the old Premium download. Commit the approved photo, PDFs, and generated
+`src/content/cv-status.json` together for CI. See `assets/cv/README.md`.
