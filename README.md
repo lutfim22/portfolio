@@ -41,7 +41,7 @@ pnpm test:smoke
 ```
 
 The smoke test starts and stops its own production server on port 3100. It checks
-the default redirect, fourteen localized core pages, MDX case-study sections,
+the default redirect, sixteen localized core pages, MDX case-study sections,
 language-switch targets, semantic landmarks, and invalid locale/project 404s. Port 3100 must be free. GitHub Actions runs
 these same checks. To run the production app manually, use `pnpm build` and
 `pnpm start`.
@@ -57,8 +57,8 @@ these same checks. To run the production app manually, use `pnpm build` and
 
 MDX is executable content: only compile reviewed repository files, never remote
 or user-supplied MDX. The homepage uses the owner-approved Milestone 2 design. Core pages and six
-localized MDX case studies are implemented. CV production and launch checks
-remain later milestones. No external fonts or runtime API access are
+localized MDX case studies are implemented. CV production is delivered in merged PR #7; photo delivery remains deferred.
+Quality and launch preparation are documented in [the quality guide](docs/QUALITY_AND_LAUNCH.md). No external fonts or runtime API access are
 needed for the foundation build.
 
 Vercel preview integration and production deployment are not configured. They
@@ -79,15 +79,17 @@ See [the review guide](docs/design-review/README.md) for images and decisions.
 After building, run the real-browser and automated accessibility checks:
 
 ```sh
-pnpm exec playwright install chromium
+pnpm exec playwright install --with-deps chromium firefox webkit
 pnpm test:browser
 ```
 
 If Chromium is already installed in the cloud environment, use
 `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium pnpm test:browser`.
 The runner starts and stops its own production server on port 3120. It captures
-review images at desktop and mobile sizes in both themes. Chromium checks do not
-establish cross-browser compatibility or a complete WCAG audit.
+review images at desktop and mobile sizes in both themes. Chromium runs the
+full review suite; Firefox and WebKit run core navigation, accessibility, theme,
+locale, and CV-download tests. These checks do not establish a complete WCAG
+audit or coverage of every physical browser/device.
 
 ## Milestone 3 content and validation
 
@@ -146,3 +148,15 @@ creates the final Premium PDF and enables its download automatically. Without a
 photo, Premium remains a marked draft. Removing the asset and rerunning removes
 the old Premium download. Commit the approved photo, PDFs, and generated
 `src/content/cv-status.json` together for CI. See `assets/cv/README.md`.
+
+## SEO and launch audits
+
+Production metadata uses an explicitly configured HTTPS `SITE_URL`. Builds stay
+noindex until `SITE_INDEXABLE=true`; Vercel previews stay noindex even when that
+flag is set. Canonical/hreflang URLs never fall back to an unverified hostname.
+Changing these settings requires rebuilding. `/robots.txt`, `/sitemap.xml`,
+localized Open Graph PNGs, and homepage Person JSON-LD share the same settings.
+
+See [quality and launch preparation](docs/QUALITY_AND_LAUNCH.md) for both audit
+configurations, Lighthouse commands/reports, cross-browser evidence, and the
+remaining domain, telemetry, and deployment approval steps.

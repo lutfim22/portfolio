@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import cvStatus from "@/content/cv-status.json";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -9,13 +10,13 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  return {
+  return pageMetadata(locale, "cv", {
     title: locale === "en" ? "Curriculum vitae" : "Daftar riwayat hidup",
     description:
       locale === "en"
         ? "Download Luthfi Musthafa’s English CV."
         : "Unduh CV Luthfi Musthafa dalam bahasa Inggris.",
-  };
+  });
 }
 export default async function CvPage({ params }: Props) {
   const { locale } = await params;

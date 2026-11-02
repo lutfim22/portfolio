@@ -49,6 +49,7 @@ try {
       "/about",
       "/journey",
       "/contact",
+      "/cv",
       "/projects/family-care",
       "/projects/virtual-home",
       "/projects/air-care",
@@ -78,8 +79,8 @@ try {
         `${path}: approved design applied`,
       );
       assert.ok(
-        !html.includes('content="noindex'),
-        `${path}: review metadata does not leak`,
+        !html.includes('class="review-banner"'),
+        `${path}: review banner does not leak`,
       );
       if (page === "/about")
         assert.ok(

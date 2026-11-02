@@ -7,11 +7,24 @@ export default defineConfig({
   reporter: "list",
   use: {
     baseURL: "http://127.0.0.1:3120",
-    launchOptions: {
-      executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
-    },
     trace: "retain-on-failure",
   },
+  projects: [
+    {
+      name: "chromium",
+      use: {
+        browserName: "chromium",
+        launchOptions: {
+          executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
+        },
+      },
+    },
+    ...(["firefox", "webkit"] as const).map((browserName) => ({
+      name: browserName,
+      testMatch: ["**/portfolio.spec.ts", "**/cv.spec.ts"],
+      use: { browserName },
+    })),
+  ],
   webServer: {
     command:
       "node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3120",

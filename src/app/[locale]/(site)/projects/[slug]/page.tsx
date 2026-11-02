@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -19,10 +20,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   if (!isLocale(locale) || !isProjectSlug(slug)) notFound();
-  return {
+  return pageMetadata(locale, `projects/${slug}`, {
     title: projects[slug][locale].title,
     description: projects[slug][locale].context,
-  };
+  });
 }
 export default async function Project({ params }: Props) {
   const { locale, slug } = await params;

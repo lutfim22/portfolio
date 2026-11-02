@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/site-shell";
 import { loadAbout } from "@/content/about";
 import { siteContent } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 import { isLocale } from "@/lib/i18n";
 
 export async function generateMetadata({
@@ -12,7 +13,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  return { title: siteContent[locale].about };
+  return pageMetadata(locale, "about", {
+    title: siteContent[locale].about,
+    description:
+      locale === "en"
+        ? "About Luthfi Musthafa: web application engineering, cross-platform integration, and technical leadership in Jakarta, Indonesia."
+        : "Tentang Luthfi Musthafa: engineering aplikasi web, integrasi lintas platform, dan kepemimpinan teknis di Jakarta, Indonesia.",
+  });
 }
 
 export default async function About({
