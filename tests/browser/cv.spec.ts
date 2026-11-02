@@ -1,3 +1,4 @@
+import cvStatus from "../../src/content/cv-status.json" with { type: "json" };
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -43,8 +44,10 @@ for (const locale of ["en", "id"])
     await expect(page).toHaveURL(
       new RegExp(`/${locale === "en" ? "id" : "en"}/cv$`),
     );
-    await expect(page.locator('a[href*="premium"][download]')).toHaveCount(0);
+    await expect(page.locator('a[href*="premium"][download]')).toHaveCount(
+      cvStatus.premiumAvailable ? 1 : 0,
+    );
     expect(
       (await page.request.get("/cv/luthfi-musthafa-premium.pdf")).status(),
-    ).toBe(404);
+    ).toBe(cvStatus.premiumAvailable ? 200 : 404);
   });

@@ -18,7 +18,9 @@
     "test:smoke": "node scripts/smoke.mjs",
     "test:browser": "playwright test",
     "cv:generate": "node scripts/generate-cv.mjs",
-    "cv:check": "node scripts/check-cv.mjs"
+    "cv:check": "node scripts/check-cv.mjs",
+    "cv:refresh": "node scripts/generate-cv.mjs && node scripts/check-cv.mjs && next build --webpack",
+    "cv:test": "node scripts/test-cv-assets.mjs"
   },
   "dependencies": {
     "@fontsource-variable/geist": "5.3.0",

@@ -1,14 +1,33 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { getDocument, OPS } from "pdfjs-dist/legacy/build/pdf.mjs";
+import { cvPaths, option, loadHeadshot } from "./cv-assets.mjs";
 import { loadCvContent, cvFacts } from "./cv-content.mjs";
 
 const content = await loadCvContent();
 const normalize = (value) =>
   value.normalize("NFKC").replace(/[\s\u00ad\u200b]+/g, "");
+const files = cvPaths(option("output-root"));
+const status = JSON.parse(await readFile(files.status, "utf8"));
+assert.equal(
+  typeof status.premiumAvailable,
+  "boolean",
+  "CV readiness must be generated",
+);
+const photo = await loadHeadshot(option("asset-dir"), option("headshot"));
+assert.equal(
+  status.premiumAvailable,
+  Boolean(photo),
+  "Headshot asset changed; run pnpm cv:generate",
+);
+assert.equal(
+  status.headshotSha256,
+  photo?.sha256 ?? null,
+  "Headshot changed; regenerate PDFs",
+);
 const paths = [
-  "public/cv/luthfi-musthafa-ats.pdf",
-  "docs/cv-review/luthfi-musthafa-premium-draft.pdf",
+  files.ats,
+  status.premiumAvailable ? files.premium : files.draft,
 ];
 for (const path of paths) {
   const loading = getDocument({
@@ -84,10 +103,16 @@ for (const path of paths) {
           text.indexOf(headings[i]) > text.indexOf(headings[i - 1]),
           "ATS section reading order",
         );
+    } else if (status.premiumAvailable) {
+      assert.ok(images > 0, "Final Premium includes the supplied image");
+      assert.ok(
+        !normalized.includes(normalize("HEADSHOT REQUIRED")),
+        "Final Premium has no draft label",
+      );
     } else
       assert.ok(
         normalized.includes(normalize("HEADSHOT REQUIRED")),
-        "Premium stays clearly marked as a draft",
+        "Photo-free Premium remains a draft",
       );
     console.log(
       `PASS ${path}: 2 A4 pages, selectable text, source parity, clickable contact links`,

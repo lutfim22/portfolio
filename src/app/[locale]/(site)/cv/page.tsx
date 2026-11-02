@@ -1,3 +1,4 @@
+import cvStatus from "@/content/cv-status.json";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLocale } from "@/lib/i18n";
@@ -56,10 +57,24 @@ export default async function CvPage({ params }: Props) {
       <section className="cv-download" aria-labelledby="premium-title">
         <h2 id="premium-title">{en ? "Premium CV" : "CV Premium"}</h2>
         <p>
-          {en
-            ? "The visual edition is being prepared. The complete professional details are available in the CV above."
-            : "Edisi visual sedang disiapkan. Rincian profesional lengkap tersedia dalam CV di atas."}
+          {cvStatus.premiumAvailable
+            ? en
+              ? "An editorial two-column PDF with the same professional details. English · A4 · 2 pages."
+              : "PDF editorial dua kolom dengan rincian profesional yang sama. Bahasa Inggris · A4 · 2 halaman."
+            : en
+              ? "The visual edition is being prepared. The complete professional details are available in the CV above."
+              : "Edisi visual sedang disiapkan. Rincian profesional lengkap tersedia dalam CV di atas."}
         </p>
+        {cvStatus.premiumAvailable && (
+          <a
+            className="ds-button"
+            href="/cv/luthfi-musthafa-premium.pdf"
+            download="Luthfi-Musthafa-Premium-CV.pdf"
+          >
+            {en ? "Download Premium CV (PDF)" : "Unduh CV Premium (PDF)"}
+            <Arrow />
+          </a>
+        )}
       </section>
     </SiteShell>
   );

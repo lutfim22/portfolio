@@ -7,17 +7,13 @@ numbers, proprietary diagrams, or artificial photographs were added.
 
 ## Files
 
-- [ATS CV](../../public/cv/luthfi-musthafa-ats.pdf): two A4 pages, English, single
-  column, black-and-white, selectable text, no photo.
-- [Premium draft](luthfi-musthafa-premium-draft.pdf): two A4 pages, English, main
-  experience/projects column, supporting sidebar, violet accents, self-hosted
-  Space Grotesk/Geist. Clearly marked as a draft requiring a headshot.
-- [ATS page 1](ats-1.png), [page 2](ats-2.png).
-- [Premium page 1](premium-1.png), [page 2](premium-2.png).
+[Current generated PDFs and page previews](FILES.md) are updated automatically
+by the generator. Both variants contain two English A4 pages. ATS is single
+column and photo-free; Premium is a two-column draft without a photo, or a final
+PDF when an approved asset is present. Previews are refreshed in the same run.
 
-The ATS file is downloadable from `/en/cv` and `/id/cv`. The website does not
-expose a Premium download or pretend a professional headshot exists. Its draft
-lives in review documentation, not `public/cv`.
+The ATS file is downloadable from `/en/cv` and `/id/cv`. The website exposes a Premium download only when the generated readiness flag
+is true. Without an asset, its draft lives in review documentation, not `public/cv`.
 
 ## Reproduction and validation
 
@@ -44,19 +40,43 @@ and header, and the absence of an unfinished public Premium download. Existing
 site checks continue to run. These checks do not certify every ATS vendor or
 constitute a complete PDF accessibility audit.
 
-## Remaining owner action
+## Deferred photo: replace an asset and regenerate
 
-Provide a professional PNG or JPEG headshot that you own or have permission to
-use and approve its inclusion in the public Premium CV. A head-and-shoulders
-portrait with a neutral background is suitable. No portrait has been invented
-or substituted. The ATS version can be reviewed independently.
+The owner chose to provide the photo later. Photo delivery is not a blocker for
+reviewing/merging the generator tooling or the ATS CV now.
 
-After the headshot is supplied, the agent will generate the final Premium PDF,
-validate the photo's placement and both PDFs' content parity, and update the
-public download and checks in a focused follow-up PR. The generator supports
-`--headshot=/path/to/approved-photo.png --final-premium`; it rejects final Premium
-output without a photo. That command alone does not publish the website or
-complete the follow-up integration/review.
+1. Put one approved image at `assets/cv/headshot.png`, `headshot.jpg`, or
+   `headshot.jpeg`. Keep only one matching file.
+2. Run `pnpm cv:refresh` from the repository root.
+3. Review the generated final Premium PDF, commit the photo and generated outputs,
+   and open/update the focused PR for owner merge review. Use the required Codex
+   attribution on AI-assisted commits.
+
+The command generates both layouts, checks them, and rebuilds the portfolio. It
+automatically enables the Premium download on both localized CV pages when a
+valid image is present. No manual source-code or link edits are needed. Removing
+the image and rerunning restores the draft and removes the stale public Premium
+file/link. ATS never receives the photograph.
+
+`src/content/cv-status.json` is generated last and records availability plus a
+SHA-256 digest of the selected asset. The PDF check catches changed/missing
+assets that have not been regenerated. Add the photo only when you own or have
+permission to publish it; this is a public repository.
+
+Without a photo, `pnpm cv:generate` remains successful and produces the draft.
+`--final-premium` explicitly requires a photo. Existing `--headshot=/path/to/file`
+usage remains available; the fixed asset path is recommended for reproducible CI.
+For an explicit external path, use the same `--headshot` option with `cv:check`;
+copy the final photo into the fixed repository asset location before committing
+outputs so CI can reproduce them.
+
+`pnpm cv:test` exercises PNG/JPEG final generation, content parity, changed-asset
+detection, duplicate files, invalid signatures, undecodable images, protected
+prior output, and removal/restoration. Neutral synthetic test pixels exist only
+inside temporary directories; none are shipped as a portrait or product asset.
+Generation verifies image decoding, page bounds, and footer separation before
+publishing outputs. The remaining limitation is visual review of the real photo
+once supplied; no real headshot has been fabricated or validated in this PR.
 
 Final CV content and visual approval, PR merge, and production deployment remain
 separate owner decisions. No merge or deployment was performed for this task.

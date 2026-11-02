@@ -1,6 +1,6 @@
 # Implementation Roadmap — Codex Execution Plan
 
-Status: Documentation, foundation (#3), design (#4), and core content (#5) are merged. Milestone 4 delivers an ATS CV, a Premium layout draft, and bilingual download pages. Premium finalization requires an owner-supplied headshot. Website deployment remains pending.
+Status: Documentation, foundation (#3), design (#4), and core content (#5) are merged. Milestone 4 delivers an ATS CV, a Premium layout draft, and bilingual download pages. The owner deferred the photo: asset-driven generation is ready now; a supplied headshot automatically enables the final Premium PDF later. Website deployment remains pending.
 
 ## Repository and Governance
 - Repository: `github.com/lutfim22/portfolio` (created; public).
@@ -83,9 +83,9 @@ remain later work; no launch is implied by local completion.
 
 Tasks:
 1. Implemented for review: two-page A4 ATS PDF, single column, no photograph; generated directly from the professional profile.
-2. Implemented for review: two-page A4 Premium layout with violet accents. Finalization and public download remain blocked on an owner-supplied headshot.
+2. Implemented for review: two-page A4 Premium layout with violet accents. Photo is deferred by the owner; a valid fixed-path asset automatically enables final generation and its public download later.
 3. Implemented: automated two-page/A4/text-extraction/link/source-parity checks and print-overflow checks; both layouts visually reviewed.
-4. Implemented: localized CV pages, navigation, and a working ATS download. Premium draft stays outside public download files until finalized.
+4. Implemented: localized CV pages, navigation, and a working ATS download. Premium stays a draft without a photo; adding the asset and running `pnpm cv:refresh` enables the final download without code edits.
 
 Acceptance:
 - Both versions use identical approved facts, are selectable/searchable, and are legible in print.
@@ -124,6 +124,6 @@ Milestone 0 was merged in PR #1. Foundation [#3](https://github.com/lutfim22/por
 and design [#4](https://github.com/lutfim22/portfolio/pull/4) are merged.
 Core-content [#5](https://github.com/lutfim22/portfolio/pull/5) is also merged.
 CV production is delivered for review in [#7](https://github.com/lutfim22/portfolio/pull/7)
-against main. Final Premium delivery remains blocked on the headshot. See [PR delivery rules](PR_WORKFLOW.md) for the complete milestone
+against main. Photo delivery is deferred; the generator workflow can be reviewed now. See [PR delivery rules](PR_WORKFLOW.md) for the complete milestone
 mapping, review gates, dependency order, and future CV/quality work. Chat
 approval of a visual direction does not authorize a GitHub merge or deployment.
