@@ -61,9 +61,10 @@ test("default and noncanonical hosts load no telemetry; privacy disclosure is lo
 }) => {
   const requests: string[] = [];
   page.on("request", (request) => {
+    const url = new URL(request.url());
     if (
-      request.url().includes("/_vercel/") ||
-      request.url().includes("vercel-scripts.com")
+      url.pathname.startsWith("/_vercel/") ||
+      url.hostname === "va.vercel-scripts.com"
     )
       requests.push(request.url());
   });
