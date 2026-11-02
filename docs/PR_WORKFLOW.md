@@ -57,12 +57,15 @@ deployment still require explicit authorization.
 | 2 — Design | [#4](https://github.com/lutfim22/portfolio/pull/4) | main | Merged |
 | 3 — Core content | [#5](https://github.com/lutfim22/portfolio/pull/5) | main | Merged |
 | 4 — CVs | [#7](https://github.com/lutfim22/portfolio/pull/7) | main | Merged; photo deferred, asset-driven generator ready |
-| 5 — Quality/launch | [#9](https://github.com/lutfim22/portfolio/pull/9) | main | Quality/SEO merged; telemetry/build preparation follows on `feat/telemetry-launch-prep`; domain/deployment pending |
+| 5 — Quality/launch | [#9](https://github.com/lutfim22/portfolio/pull/9) | main | Quality/SEO merged; telemetry/build preparation merged in #10; domain/deployment pending |
+| 5 — Telemetry/build preparation | [#10](https://github.com/lutfim22/portfolio/pull/10) | main | Merged; optional collection and Git deployment automation remain off |
 
 Foundation PR #3, design PR #4, core-content PR #5, and CV PR #7 are merged.
-Milestone 5 quality/SEO PR #9 is merged. Optional telemetry and Vercel build
-preparation proceed on `feat/telemetry-launch-prep`. No website deployment has
-been performed.
+Milestone 5 quality/SEO PR #9 and telemetry/build PR #10 are merged. No website
+deployment has been performed. A new Vercel project's first deployment is
+Production, including an explicit preview target, and needs explicit initial
+Production approval. Later Preview deployments require their own authorized
+scope. See [the deployment sequence](TELEMETRY_AND_DEPLOYMENT.md#the-first-deployment-is-production).
 
 ## Security workflow follow-up
 

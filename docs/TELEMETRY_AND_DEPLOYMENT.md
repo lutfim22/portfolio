@@ -1,8 +1,9 @@
 # Telemetry and deployment preparation
 
-Quality/SEO [PR #9](https://github.com/lutfim22/portfolio/pull/9) is merged.
-This follow-up prepares optional telemetry and Vercel build settings. It does
-not create a Vercel project, verify/reserve a domain, enable a provider, or deploy.
+Quality/SEO [PR #9](https://github.com/lutfim22/portfolio/pull/9) and telemetry/build
+preparation [PR #10](https://github.com/lutfim22/portfolio/pull/10) are merged.
+No Vercel project creation, domain reservation, provider activation, or website
+deployment has been performed by this work.
 
 ## Runtime behavior
 
@@ -66,39 +67,75 @@ with `git.deploymentEnabled=false` until deployment automation is approved. This
 does not block a manual import, CLI deployment, or dashboard deployment; those
 still require the owner's explicit authorization.
 
-When Vercel account access and preview deployment approval are available:
+### The first deployment is Production
+
+Vercel's [environment documentation](https://vercel.com/docs/deployments/environments#first-deployment)
+states that a new project's first deployment is always **Production**. This
+includes dashboard imports, CLI calls without `--prod`, an explicit
+`--target=preview`, and non-production branches. It uses **Production** environment
+variables; Preview-only variables do not apply to that first build.
+
+Inspect project deployment history before requesting approval. A retained failed,
+errored, or canceled deployment counts as the first deployment, but deleting all
+deployments makes the next one a first deployment again. Do not manufacture a
+failed deployment to work around the approval gate. An owner request for
+Preview alone does not authorize a new project's first Production deployment.
+
+For a genuinely new project, obtain explicit approval for the initial Production
+deployment with indexing and optional telemetry disabled. A successful initial
+deployment may serve the website on a public Vercel URL. Noindex controls search
+discovery; it does not restrict access. Inspect the account's available deployment
+protection and its actual scope before promising private access.
+
+### Setup and deployment sequence
+
+When Vercel account access is available:
 
 1. Inspect existing projects and their linked repository before creating or
    changing anything. Use `lutfim22/portfolio`, root directory `.`, Next.js,
    Node.js 24.x, and the approved main commit. Do not overwrite an existing site.
-2. Enable Corepack for the build with `ENABLE_EXPERIMENTAL_COREPACK=1` if required
+2. Create/link the project without deploying, using supported project-management
+   tools or `corepack pnpm dlx vercel@latest link` after owner-side CLI login.
+   A dashboard import's **Deploy** action can create the first Production
+   deployment; leave it until the applicable deployment approval is granted.
+3. Enable Corepack for the build with `ENABLE_EXPERIMENTAL_COREPACK=1` if required
    by Vercel's current build environment. Install command:
    `corepack pnpm install --frozen-lockfile`; build: `corepack pnpm build`.
    Confirm logs show the pinned pnpm 12.16.1 and Node 24.
-3. Verify the planned `itsvee98.vercel.app` domain in the account or use the
+4. Verify the planned `itsvee98.vercel.app` domain in the account or use the
    owner's confirmed alternative. A DNS/HTTP response alone does not establish
    ownership or availability. A read-only probe on 2026-11-02 returned HTTP 404 with
    `DEPLOYMENT_NOT_FOUND`; it does not prove the domain can be claimed. Set
-   `SITE_URL` to the verified HTTPS origin.
-4. Keep `SITE_INDEXABLE=false`, `SITE_ANALYTICS=false`,
-   `SITE_SPEED_INSIGHTS=false`, and `SERVER_ERROR_LOGGING=false` for the initial
-   preview. Vercel supplies `VERCEL_ENV`; do not manually turn a preview into
-   `production` to bypass the gates. Review deployment-protection settings.
-5. After explicit preview approval, create the preview. Check EN/ID routes,
+   `SITE_URL` to the verified HTTPS origin. If it is not yet verified, leave
+   `SITE_URL` unset for initial review; the app omits absolute discovery URLs.
+5. Keep `SITE_INDEXABLE=false`, `SITE_ANALYTICS=false`,
+   `SITE_SPEED_INSIGHTS=false`, and `SERVER_ERROR_LOGGING=false` in both
+   **Production and Preview** for initial review. Set Corepack for both as well.
+   Vercel supplies `VERCEL_ENV`; do not override it to change an environment's
+   behavior. Review deployment protection and deployment history.
+6. If the project has no deployments, obtain the owner's explicit initial
+   Production approval before triggering its first deployment. Keep the review
+   settings from step 5. If a retained deployment already exists, explicit
+   Preview approval permits `corepack pnpm dlx vercel@latest deploy --target=preview`.
+   Confirm the actual environment and assigned URLs in Vercel after deployment.
+7. Check EN/ID routes,
    language/theme state, Contact privacy links, ATS download, social PNGs,
-   canonical origin, noindex metadata, disallowed robots, and empty sitemap.
+   configured canonical origin (or its deliberate absence), noindex metadata,
+   disallowed robots, and empty sitemap.
    Finish physical-device and assistive-technology review there.
-6. Before production activation, review the public content/disclosure and
+8. Before enabling indexing or optional telemetry for launch, review the public content/disclosure and
    selected telemetry. Enable Web Analytics and Speed Insights in that project
    if desired; configure production flags separately. Review runtime-log access
    and monitoring. Obtain explicit production deployment approval for the
    reviewed commit and verified domain before deploying with indexing enabled.
-7. Check production links/metadata/discovery files, dashboard ingestion and
+9. Check production links/metadata/discovery files, dashboard ingestion and
    DNT/GPC behavior, and the approved rollback deployment. Git automation stays
    off until separately approved and changed in a focused PR.
 
 No Vercel tool, CLI credential, or linked project was available in the cloud
-session when preparing this change. Account setup and actual domain checks
+session when preparing this change. An already-installed plugin may still have
+no callable tools exposed in the active turn; check tool availability rather
+than assuming the plugin must be installed again. Account setup and actual domain checks
 remain dependent on that access; no credential should be pasted into the repo
 or chat. Connect Vercel to the session using the supported app/credential flow.
 
