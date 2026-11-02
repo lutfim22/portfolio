@@ -160,3 +160,18 @@ localized Open Graph PNGs, and homepage Person JSON-LD share the same settings.
 See [quality and launch preparation](docs/QUALITY_AND_LAUNCH.md) for both audit
 configurations, Lighthouse commands/reports, cross-browser evidence, and the
 remaining domain, telemetry, and deployment approval steps.
+
+## Optional telemetry and Vercel preparation
+
+Vercel Analytics and Speed Insights are prepared behind independent opt-in
+switches. They stay off by default and on preview/local builds, honor DNT/GPC,
+and accept only known public page URLs without queries/fragments. The Contact
+page includes an EN/ID privacy disclosure linked from core footers. Limited
+server error records can be enabled separately without sending request data or
+raw error messages to an external service.
+
+`vercel.json` uses Corepack/pinned pnpm and disables Git-triggered deployments.
+Manual deployments still require explicit owner approval. See
+[telemetry and deployment preparation](docs/TELEMETRY_AND_DEPLOYMENT.md) for exact
+account/build/environment settings, validation, activation, and remaining access
+requirements. No deployment or provider activation is performed by these changes.

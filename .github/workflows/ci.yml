@@ -32,11 +32,17 @@ jobs:
         env:
           SITE_URL: https://portfolio.example
           SITE_INDEXABLE: "true"
-      - name: Verify configured SEO in production HTML
-        run: pnpm test:browser seo.spec.ts --project=chromium
+          VERCEL_ENV: production
+          SITE_ANALYTICS: "true"
+          SITE_SPEED_INSIGHTS: "true"
+      - name: Verify configured SEO and telemetry with local fixtures
+        run: pnpm test:browser seo.spec.ts telemetry.spec.ts --project=chromium
         env:
           SITE_URL: https://portfolio.example
           SITE_INDEXABLE: "true"
+          VERCEL_ENV: production
+          SITE_ANALYTICS: "true"
+          SITE_SPEED_INSIGHTS: "true"
       - run: pnpm test:lighthouse
       - uses: actions/upload-artifact@v7.0.2
         if: always()

@@ -2,7 +2,9 @@
 
 Milestone 4 merged in [PR #7](https://github.com/lutfim22/portfolio/pull/7).
 Photo delivery remains deferred: `pnpm cv:refresh` enables Premium when the
-approved asset is added. Milestone 5 quality work does not publish the website.
+approved asset is added. Quality/SEO PR #9 is merged. Telemetry/build preparation is described in
+[the deployment guide](TELEMETRY_AND_DEPLOYMENT.md); optional features stay off
+until configured and approved. No website deployment has been performed.
 
 ## SEO configuration
 
@@ -123,15 +125,14 @@ reporting is explicitly disabled. No Sentry SDK is added to the application.
 
 ## Remaining launch actions
 
-1. Review and merge the quality PR after CI and CodeQL pass.
+1. Completed: quality/SEO PR #9 merged after CI and CodeQL passed.
 2. Verify the production domain and authorize Vercel project/deployment setup.
    Configure `SITE_URL` for builds and retain preview noindex behavior. Enable
    `SITE_INDEXABLE=true` only for an approved production launch.
-3. Choose and approve telemetry. The product plan prefers Vercel Analytics and
-   Speed Insights; no runtime analytics scripts, error-reporting SDK, cookies, or
-   telemetry endpoints are introduced by this PR. Configure the selected
-   providers and disclosure in a focused follow-up before launch. Error
-   monitoring must avoid sending CV/contact data or user input.
+3. Review optional telemetry and the localized disclosure in the focused
+   follow-up. Vercel Analytics/Speed Insights and limited server error logging
+   default off. Configure the selected provider features and production flags
+   before activation; dashboard ingestion requires a deployed project.
 4. Review the deployed preview, physical-device/assistive-technology results,
    public content, CV readability, social cards, and actual domain discovery
    files. Request explicit production launch approval, then recheck production
